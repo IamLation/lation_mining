@@ -1,10 +1,16 @@
 Config = {}
 
+Config.Framework = 'esx' -- 'esx' or 'qbcore' or 'custom' (custom option will require editing the function.lua files for your framework)
+
 -- General configurations
 Config.EnableNightMining = false -- By default this is false which means players cannot mine between the nightly hours of 20:00 to 05:00.
 Config.MinMiningTime = 2000 -- How long at minimum mining a single material should take
 Config.MaxMiningTime = 4000 -- How long at maximum mining a single material should take
 Config.PickaxeItemName = 'pickaxe' -- The item name required to start mining
+Config.BreakPickaxe = false -- If using ox_inventory v.2.31.0 or later, keep this set to false and use "decay" feature. Otherwise, recommended to set to true
+Config.BreakChance = 10 -- What percentage chance should a pickaxe have to break
+Config.Anticheat = true -- Display a skillcheck at random intervals to deter autoclicking (True to enabled, false to disable)
+Config.AnticheatChance = 20 -- What percentage chance should a player be hit with the anticheat while mining? (10 = 10% chance)
 
 Config.Selling = {
     enabled = true, -- Do you want to enable selling materials? (True if yes, false if no)
@@ -51,54 +57,63 @@ Config.SmeltingOptions = {
     scrap_metal = { -- The item name itself
         label = 'Scrap Metal', -- The item "label" / not the item name
         smeltable = false, -- Are you able to smelt this item? (True if yes, false if no)
+        sellable = true, -- Are you able to sell this item? (True if yes, false if no)
         duration = nil, -- If item is not smeltable, set to nil. If smeltable, you need a duraction (in milliseconds)
         price = 50 -- How much does this item sell for if Config.Selling = true
     },
     stone = {
         label = 'Stone',
         smeltable = false,
+        sellable = true,
         duration = nil,
         price = 75
     },
     raw_copper = {
         label = 'Raw Copper',
         smeltable = true,
+        sellable = true,
         duration = 1000,
         price = 100
     },
     raw_iron = {
         label = 'Raw Iron',
         smeltable = true,
+        sellable = true,
         duration = 2000,
         price = 125
     },
     raw_steel = {
         label = 'Raw Steel',
         smeltable = true,
+        sellable = true,
         duration = 2000,
         price = 150
     },
     raw_silver = {
         label = 'Raw Silver',
         smeltable = true,
+        sellable = true,
         duration = 3000,
         price = 175
     },
     raw_gold = {
         label = 'Raw Gold',
         smeltable = true,
+        sellable = true,
         duration = 3000,
         price = 200
     },
     raw_diamond = {
         label = 'Raw Diamond',
         smeltable = true,
+        sellable = true,
         duration = 4000,
         price = 225
     },
     raw_emerald = {
         label = 'Raw Emerald',
         smeltable = true,
+        sellable = true,
         duration = 5000,
         price = 250
     },
@@ -131,7 +146,7 @@ Config.BlipSettings = {
     smeltSettings = {
         blipName = 'Smelting',
         blipSprite = 648,
-        blipColor = 17, 
+        blipColor = 17,
         blipScale = 0.80
     },
     sellSettings = {
@@ -153,7 +168,9 @@ Notify = {
     cancelledSmelting = 'You stopped smelting ',
     cancelledSell = 'You stopped selling your materials',
     missingItem = 'You do not have enough ',
-    missingItemSell = 'You do not have enough'
+    missingItemSell = 'You do not have enough',
+    soldItems = 'You have been paid $',
+    pickaxeBroke = 'Your pickaxe has broke'
 }
 
 TextUI = {

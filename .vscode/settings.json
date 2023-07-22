@@ -1,0 +1,25 @@
+{
+    "Lua.diagnostics.globals": [
+        "lib",
+        "AddTextComponentString",
+        "cb",
+        "startSmelt",
+        "ESX",
+        "checkPlayerDistance",
+        "startSelling",
+        "spawnSellingNPC",
+        "checkTextUI",
+        "startMining",
+        "getPlayer",
+        "addAccountMoney",
+        "giveItem",
+        "hasItem",
+        "removeItem",
+        "serverNotify",
+        "notify",
+        "cache",
+        "npc",
+        "anticheatCheck",
+        "miningZones"
+    ]
+}
