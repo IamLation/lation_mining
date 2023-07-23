@@ -101,7 +101,7 @@ for k, v in pairs(Config.MiningLocations) do
         else
             if IsControlJustPressed(0, 38) then
                 local hasPick = hasItem(Config.PickaxeItemName)
-                if hasPick ~= nil and hasPick >= 1 then
+                if hasPick ~= nil and hasPick.count >= 1 then
                     lib.hideTextUI()
                     startMining()
                 else
