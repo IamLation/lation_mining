@@ -187,57 +187,55 @@ end
 
 -- Function that handles the smelting process
 function startSmelt()
-    if Config.Selling.enabled then
-        local smeltInput = lib.inputDialog('Choose Material', {
-            {type = 'select', label = 'Raw Material', description = 'What do you want to smelt?', required = true, icon = 'recycle', options = smeltingInputOptions},
-            {type = 'number', label = 'Quantity', description = 'How many do you want to smelt?', icon = 'hashtag', required = true}
-        })
-        if smeltInput == nil then
-            smeltStarted = false
-        else
-            local hasItem = hasItem(smeltInput[1])
-            if hasItem ~= nil and hasItem.count >= smeltInput[2] and smeltInput[2] ~= 0 and smeltInput[2] > 0 then
-                local removeItem = nil
-                local giveItem = nil
-                local duration = nil
-                for k, v in pairs(Config.SmeltingOptions) do
-                    if k == smeltInput[1] then
-                        removeItem = k
-                        giveItem = k
-                        duration = v.duration
-                    end
+    local smeltInput = lib.inputDialog('Choose Material', {
+        {type = 'select', label = 'Raw Material', description = 'What do you want to smelt?', required = true, icon = 'recycle', options = smeltingInputOptions},
+        {type = 'number', label = 'Quantity', description = 'How many do you want to smelt?', icon = 'hashtag', required = true}
+    })
+    if smeltInput == nil then
+        smeltStarted = false
+    else
+        local hasItem = hasItem(smeltInput[1])
+        if hasItem ~= nil and hasItem.count >= smeltInput[2] and smeltInput[2] ~= 0 and smeltInput[2] > 0 then
+            local removeItem = nil
+            local giveItem = nil
+            local duration = nil
+            for k, v in pairs(Config.SmeltingOptions) do
+                if k == smeltInput[1] then
+                    removeItem = k
+                    giveItem = k
+                    duration = v.duration
                 end
-                if duration == nil then
-                    smeltStarted = false
-                    return -- Something went wrong?
-                else
-                    if lib.progressCircle({
-                        duration = duration * smeltInput[2],
-                        label = ProgressCircle.smeltingLabel,
-                        position = ProgressCircle.position,
-                        useWhileDead = false,
-                        canCancel = true,
-                        anim = {dict = 'amb@world_human_stand_fire@male@idle_a', clip = 'idle_a'},
-                        disable = {move = true, car = true, combat = true}
-                    }) then
-                        giveItem = giveItem:gsub("raw_", "")
-                        TriggerServerEvent('lation_mining:rewardSmeltItem', cache.serverId, removeItem, giveItem, smeltInput[2])
-                        smeltStarted = false
-                    else
-                        local itemString = smeltInput[1]:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
-                            return first:upper() .. rest:lower()
-                        end)
-                        notify(Notify.cancelledSmelting.. itemString, 'error')
-                        smeltStarted = false
-                    end
-                end
-            else
-                local itemString = smeltInput[1]:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
-                    return first:upper() .. rest:lower()
-                end)
-                notify(Notify.missingItem.. itemString, 'error')
-                smeltStarted = false
             end
+            if duration == nil then
+                smeltStarted = false
+                return -- Something went wrong?
+            else
+                if lib.progressCircle({
+                    duration = duration * smeltInput[2],
+                    label = ProgressCircle.smeltingLabel,
+                    position = ProgressCircle.position,
+                    useWhileDead = false,
+                    canCancel = true,
+                    anim = {dict = 'amb@world_human_stand_fire@male@idle_a', clip = 'idle_a'},
+                    disable = {move = true, car = true, combat = true}
+                }) then
+                    giveItem = giveItem:gsub("raw_", "")
+                    TriggerServerEvent('lation_mining:rewardSmeltItem', cache.serverId, removeItem, giveItem, smeltInput[2])
+                    smeltStarted = false
+                else
+                    local itemString = smeltInput[1]:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
+                        return first:upper() .. rest:lower()
+                    end)
+                    notify(Notify.cancelledSmelting.. itemString, 'error')
+                    smeltStarted = false
+                end
+            end
+        else
+            local itemString = smeltInput[1]:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
+                return first:upper() .. rest:lower()
+            end)
+            notify(Notify.missingItem.. itemString, 'error')
+            smeltStarted = false
         end
     end
 end
