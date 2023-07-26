@@ -20,6 +20,14 @@
         "cache",
         "npc",
         "anticheatCheck",
-        "miningZones"
+        "miningZones",
+        "createSmeltBlip",
+        "createSellBlip",
+        "createMineBlips",
+        "smeltBlip",
+        "sellBlip",
+        "mineBlip",
+        "mineBlips",
+        "createMineZones"
     ]
 }

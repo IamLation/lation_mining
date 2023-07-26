@@ -1,13 +1,11 @@
 Config = {}
 
-Config.Framework = 'esx' -- 'esx' or 'qbcore' or 'custom' (custom option will require editing the function.lua files for your framework)
-
 -- General configurations
 Config.EnableNightMining = false -- By default this is false which means players cannot mine between the nightly hours of 20:00 to 05:00.
 Config.MinMiningTime = 2000 -- How long at minimum mining a single material should take
 Config.MaxMiningTime = 4000 -- How long at maximum mining a single material should take
 Config.PickaxeItemName = 'pickaxe' -- The item name required to start mining
-Config.BreakPickaxe = false -- If using ox_inventory v.2.31.0 or later, keep this set to false and use "decay" feature. Otherwise, recommended to set to true
+Config.BreakPickaxe = false -- If using ox_inventory v.2.31.0 or later, keep this set to false and it will use "decay" feature instead. Otherwise, recommended to set to true
 Config.BreakChance = 10 -- What percentage chance should a pickaxe have to break
 Config.Anticheat = true -- Display a skillcheck at random intervals to deter autoclicking (True to enabled, false to disable)
 Config.AnticheatChance = 20 -- What percentage chance should a player be hit with the anticheat while mining? (10 = 10% chance)
@@ -121,8 +119,6 @@ Config.SmeltingOptions = {
 }
 
 -- This is both the blip & target location for smelting
--- If your having issues adjusting the target you may need
--- to go to client/client.lua line 440 and adjust the "size"
 Config.SmeltingLocation = vec3(1086.3845, -2003.6810, 30.9738)
 
 -- All the locations at which a player can start mining
@@ -132,7 +128,7 @@ Config.MiningLocations = {
     vec3(2980.8755, 2824.4500, 45.9470),
     vec3(3001.8000, 2791.0654, 44.8597),
     vec3(2999.3096, 2752.8396, 44.1624),
-    vec3(2981.2747, 2749.6770, 43.1636),
+    vec3(2981.2747, 2749.6770, 43.1636)
 }
 
 -- The blip settings for each type of blip
@@ -191,5 +187,22 @@ Target = {
     smeltIcon = 'fas fa-fire',
     sellLabel = 'Sell materials',
     sellIcon = 'fas fa-hand-holding-dollar'
+}
+
+InputDialog = {
+    smeltTitle = 'Choose Material',
+    smeltSelectMaterial = 'Raw Material',
+    smeltSelectMaterialDesc = 'What do you want to smelt?',
+    smeltSelectMaterialIcon = 'recycle',
+    smeltSelectQuantity = 'Quantity',
+    smeltSelectQuantityDesc = 'How many do you want to smelt?',
+    smeltSelectQuantityIcon = 'hashtag',
+    sellTitle = 'Choose Material',
+    sellSelectMaterial = 'Material',
+    sellSelectMaterialDesc = 'What do you want to sell?',
+    sellSelectMaterialIcon = 'recycle',
+    sellSelectQuantity = 'Quantity',
+    sellSelectQuantityDesc = 'How many do you want to sell?',
+    sellSelectQuantityIcon = 'hashtag'
 }
 

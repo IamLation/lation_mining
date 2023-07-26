@@ -3,19 +3,12 @@ local sellingNPCLocation = lib.points.new(Config.Selling.coords, 40)
 local textUI, smeltStarted, failedAntiCheat = false, false, false
 local smeltingInputOptions, sellingInputOptions = {}, {}
 
--- Get framework
-if Config.Framework == 'esx' then
-    ESX = exports["es_extended"]:getSharedObject()
-else
-    QBCore = exports['qb-core']:GetCoreObject()
-end
-
 -- Ensures all options from Config.SmeltingOptions are inserted into the Input Dialog
 for k, v in pairs(Config.SmeltingOptions) do
     if v.smeltable then
         table.insert(smeltingInputOptions, {value = k, label = v.label})
     end
-end 
+end
 
 -- Ensures all options from Config.SmeltingOptions are inserted into the Input Dialog
 if Config.Selling.enabled then
@@ -27,6 +20,18 @@ if Config.Selling.enabled then
             end
             table.insert(sellingInputOptions, { value = k, label = label })
         end
+    end
+end
+
+-- Checks if the TextUI should be displayed or not and responds
+local function checkTextUI()
+    if textUI then
+        lib.showTextUI(TextUI.label, {
+            position = TextUI.position,
+            icon = TextUI.icon
+        })
+    else
+        lib.hideTextUI()
     end
 end
 
@@ -53,7 +58,7 @@ if Config.Selling.enabled then
 end
 
 -- Create zones, blips & zone functions for mining
-for k, v in pairs(Config.MiningLocations) do
+for _, v in pairs(Config.MiningLocations) do
     local miningZones = lib.points.new(v, 3)
     local mineBlip = AddBlipForCoord(v.x, v.y, v.z)
     SetBlipSprite(mineBlip, Config.BlipSettings.mineSettings.blipSprite)
@@ -67,15 +72,15 @@ for k, v in pairs(Config.MiningLocations) do
         if not Config.EnableNightMining then
             local hour = GetClockHours()
             if hour >= 20 or hour <= 4 then return
-                notify(Notify.mineAtNight, 'error')
+                ShowNotification(Notify.mineAtNight, 'error')
             end
         end
-        local hasPick = hasItem(Config.PickaxeItemName)
-        if hasPick ~= nil and hasPick.count >= 1 then
+        local hasPick = HasItem(Config.PickaxeItemName, 1)
+        if hasPick >= 1 then
             textUI = true
             checkTextUI()
         else
-            notify(Notify.noPickaxe, 'error')
+            ShowNotification(Notify.noPickaxe, 'error')
         end
     end
     function miningZones:onExit()
@@ -89,8 +94,8 @@ for k, v in pairs(Config.MiningLocations) do
                 return
             else
                 if IsControlJustPressed(0, 38) then
-                    local hasPick = hasItem(Config.PickaxeItemName)
-                    if hasPick ~= nil and hasPick.count >= 1 then
+                    local hasPick = HasItem(Config.PickaxeItemName, 1)
+                    if hasPick >= 1 then
                         lib.hideTextUI()
                         startMining()
                     else
@@ -100,8 +105,8 @@ for k, v in pairs(Config.MiningLocations) do
             end
         else
             if IsControlJustPressed(0, 38) then
-                local hasPick = hasItem(Config.PickaxeItemName)
-                if hasPick ~= nil and hasPick.count >= 1 then
+                local hasPick = HasItem(Config.PickaxeItemName, 1)
+                if hasPick >= 1 then
                     lib.hideTextUI()
                     startMining()
                 else
@@ -109,18 +114,6 @@ for k, v in pairs(Config.MiningLocations) do
                 end
             end
         end
-    end
-end
-
--- Checks if the TextUI should be displayed or not and responds
-function checkTextUI()
-    if textUI then
-        lib.showTextUI(TextUI.label, {
-            position = TextUI.position,
-            icon = TextUI.icon
-        })
-    else
-        lib.hideTextUI()
     end
 end
 
@@ -150,7 +143,7 @@ function startMining()
         local chance = math.random(1, 100)
         if chance <= Config.BreakChance then
             TriggerServerEvent('lation_mining:breakPickaxe', cache.serverId)
-            notify(Notify.pickaxeBroke, 'error')
+            ShowNotification(Notify.pickaxeBroke, 'error')
         end
     end
     if lib.progressCircle({
@@ -179,7 +172,7 @@ function startMining()
             TriggerServerEvent('lation_mining:rewardMineItem', cache.serverId, reward)
         end
     else
-        notify(Notify.cancelledMining, 'error')
+        ShowNotification(Notify.cancelledMining, 'error')
         textUI = true
         checkTextUI()
     end
@@ -187,15 +180,15 @@ end
 
 -- Function that handles the smelting process
 function startSmelt()
-    local smeltInput = lib.inputDialog('Choose Material', {
-        {type = 'select', label = 'Raw Material', description = 'What do you want to smelt?', required = true, icon = 'recycle', options = smeltingInputOptions},
-        {type = 'number', label = 'Quantity', description = 'How many do you want to smelt?', icon = 'hashtag', required = true}
+    local smeltInput = lib.inputDialog(InputDialog.smeltTitle, {
+        {type = 'select', label = InputDialog.smeltSelectMaterial, description = InputDialog.smeltSelectMaterialDesc, required = true, icon = InputDialog.smeltSelectMaterialIcon, options = smeltingInputOptions},
+        {type = 'number', label = InputDialog.smeltSelectQuantity, description = InputDialog.smeltSelectQuantityDesc, icon = InputDialog.smeltSelectQuantityIcon, required = true}
     })
     if smeltInput == nil then
         smeltStarted = false
     else
-        local hasItem = hasItem(smeltInput[1])
-        if hasItem ~= nil and hasItem.count >= smeltInput[2] and smeltInput[2] ~= 0 and smeltInput[2] > 0 then
+        local hasItem = HasItem(smeltInput[1], smeltInput[2])
+        if hasItem ~= nil and hasItem >= smeltInput[2] and smeltInput[2] ~= 0 and smeltInput[2] > 0 then
             local removeItem = nil
             local giveItem = nil
             local duration = nil
@@ -226,7 +219,7 @@ function startSmelt()
                     local itemString = smeltInput[1]:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
                         return first:upper() .. rest:lower()
                     end)
-                    notify(Notify.cancelledSmelting.. itemString, 'error')
+                    ShowNotification(Notify.cancelledSmelting.. itemString, 'error')
                     smeltStarted = false
                 end
             end
@@ -234,7 +227,7 @@ function startSmelt()
             local itemString = smeltInput[1]:gsub('_', ' '):gsub("(%a)([%w_']*)", function(first, rest)
                 return first:upper() .. rest:lower()
             end)
-            notify(Notify.missingItem.. itemString, 'error')
+            ShowNotification(Notify.missingItem.. itemString, 'error')
             smeltStarted = false
         end
     end
@@ -242,16 +235,16 @@ end
 
 if Config.Selling.enabled then
     function startSelling()
-        local sellInput = lib.inputDialog('Choose Material', {
-            {type = 'select', label = 'Material', description = 'What do you want to sell?', required = true, icon = 'recycle', options = sellingInputOptions},
-            {type = 'number', label = 'Quantity', description = 'How many do you want to sell?', icon = 'hashtag', required = true}
+        local sellInput = lib.inputDialog(InputDialog.sellTitle, {
+            {type = 'select', label = InputDialog.sellSelectMaterial, description = InputDialog.sellSelectMaterialDesc, required = true, icon = InputDialog.sellSelectMaterialIcon, options = sellingInputOptions},
+            {type = 'number', label = InputDialog.sellSelectQuantity, description = InputDialog.sellSelectQuantityDesc, icon = InputDialog.sellSelectQuantityIcon, required = true}
         })
         if sellInput == nil then
             return -- Something went wrong?
         else
             local checkItem = sellInput[1]:gsub('raw_', '')
-            local hasItem = hasItem(checkItem)
-            if hasItem ~= nil and hasItem.count >= sellInput[2] and sellInput[2] ~= 0 and sellInput[2] > 0 then
+            local hasItem = HasItem(checkItem, sellInput[2])
+            if hasItem ~= nil and hasItem >= sellInput[2] and sellInput[2] ~= 0 and sellInput[2] > 0 then
                 local price = nil
                 for k, v in pairs(Config.SmeltingOptions) do
                     if k == sellInput[1] then
@@ -271,10 +264,10 @@ if Config.Selling.enabled then
                 }) then
                     TriggerServerEvent('lation_mining:sellItem', cache.serverId, sellItem, sellInput[2], price)
                 else
-                    notify(Notify.cancelledSell, 'error')
+                    ShowNotification(Notify.cancelledSell, 'error')
                 end
             else
-                notify(Notify.missingItemSell, 'error')
+                ShowNotification(Notify.missingItemSell, 'error')
             end
         end
     end
