@@ -1,8 +1,9 @@
 # Lation's Mining
 A fun mining script for FiveM including mining, smelting & selling materials. Everything is configurable. Customize the mining locations, smelting location, selling location. Add more or remove materials, make them "smeltable" and/or "sellable" or not, set a price for each material when selling. Customize how long each material takes to smelt & much more!
 
-## Support & More
+## Support, Scripts & More
 [Click here to join our Discord](https://discord.gg/9EbY4nM5uu)
+[Click here to visit our Store](https://lationscripts.com/github)
 
 ## Features
 - Supports ESX & QBCore
