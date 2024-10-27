@@ -12,6 +12,8 @@ Customize how long each material takes to smelt & much more!
 |Support, Scripts & More| [Click here to join our Discord](https://discord.gg/9EbY4nM5uu)|[Click here to visit our Store](https://lationscripts.com/?utm_source=github&utm_medium=free-script)|
 |---|---|---|
 
+![line](https://github.com/bylickilabs/bylickilabs/assets/109308073/bfd77a60-d426-4470-b417-fdbab0166188) 
+
 |FEATURES|
 |---|
 
@@ -38,17 +40,22 @@ Customize how long each material takes to smelt & much more!
 - Customize how long a pickaxe will last before breaking (ox_inventory v2.31.0 or later required)
 ```
 
+![line](https://github.com/bylickilabs/bylickilabs/assets/109308073/bfd77a60-d426-4470-b417-fdbab0166188) 
+
 ## Dependencies
 - esx_Inventoryhud
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
 - [ox_target](https://github.com/overextended/ox_target/releases), [qb-target](https://github.com/qbcore-framework/qb-target) or [qtarget](https://github.com/overextended/ox_target/releases)
 
+![line](https://github.com/bylickilabs/bylickilabs/assets/109308073/bfd77a60-d426-4470-b417-fdbab0166188) 
 
 ## Installation
 - Ensure you have all dependencies installed
 - Add items found in "install" folder to your inventory resource
 - Add lation_mining to your 'resources' directory
 - Add 'ensure lation_mining' in your 'server.cgf'
+
+![line](https://github.com/bylickilabs/bylickilabs/assets/109308073/bfd77a60-d426-4470-b417-fdbab0166188) 
 
 ## Preview
 [Streamable - Lation's Mining](https://streamable.com/q8xp0l)
