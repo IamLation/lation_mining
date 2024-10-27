@@ -1,9 +1,17 @@
-# Lation's Mining
-A fun mining script for FiveM including mining, smelting & selling materials. Everything is configurable. Customize the mining locations, smelting location, selling location. Add more or remove materials, make them "smeltable" and/or "sellable" or not, set a price for each material when selling. Customize how long each material takes to smelt & much more!
+```yarn
+Powered by Lationscripts.com
+```
 
-## Support, Scripts & More
-- [Click here to join our Discord](https://discord.gg/9EbY4nM5uu)
-- [Click here to visit our Store](https://lationscripts.com/?utm_source=github&utm_medium=free-script)
+```yarn
+A fun mining script for FiveM including mining, smelting & selling materials. 
+Everything is configurable. 
+Customize the mining locations, smelting location, selling location. 
+Add more or remove materials, make them "smeltable" and/or "sellable" or not, set a price for each material when selling. 
+Customize how long each material takes to smelt & much more!
+```
+
+|Support, Scripts & More| [Click here to join our Discord](https://discord.gg/9EbY4nM5uu)|[Click here to visit our Store](https://lationscripts.com/?utm_source=github&utm_medium=free-script)<
+|---|---|---|
 
 ## Features
 - Supports ESX & QBCore
@@ -29,8 +37,10 @@ A fun mining script for FiveM including mining, smelting & selling materials. Ev
 
 
 ## Dependencies
+- esx_Inventoryhud
 - [ox_lib](https://github.com/overextended/ox_lib/releases)
 - [ox_target](https://github.com/overextended/ox_target/releases), [qb-target](https://github.com/qbcore-framework/qb-target) or [qtarget](https://github.com/overextended/ox_target/releases)
+
 
 ## Installation
 - Ensure you have all dependencies installed
