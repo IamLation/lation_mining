@@ -45,7 +45,7 @@ Customize how long each material takes to smelt & much more!
 |Dependencies|
 |---|
 
-|esx_Inventoryhud|[ox_lib](https://github.com/overextended/ox_lib/releases)|[ox_target](https://github.com/overextended/ox_target/releases)|[qb-target](https://github.com/qbcore-framework/qb-target)|or [qtarget](https://github.com/overextended/ox_target/releases)|
+|OPTIONAL.: esx_Inventoryhud|[ox_lib](https://github.com/overextended/ox_lib/releases)|[ox_target](https://github.com/overextended/ox_target/releases)|[qb-target](https://github.com/qbcore-framework/qb-target)|or [qtarget](https://github.com/overextended/ox_target/releases)|
 |---|---|---|---|---|
 
 
