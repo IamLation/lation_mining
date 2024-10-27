@@ -12,7 +12,7 @@ Customize how long each material takes to smelt & much more!
 |Support, Scripts & More| [Click here to join our Discord](https://discord.gg/9EbY4nM5uu)|[Click here to visit our Store](https://lationscripts.com/?utm_source=github&utm_medium=free-script)|
 |---|---|---|
 
-## Features
+```yarn
 - Supports ESX & QBCore
 - Highly detailed config file
 - Mine for varied types of ores
@@ -33,7 +33,7 @@ Customize how long each material takes to smelt & much more!
 - Anticheat feature to deter autoclicking
 - Set chance for anticheat check if enabled
 - Customize how long a pickaxe will last before breaking (ox_inventory v2.31.0 or later required)
-
+```
 
 ## Dependencies
 - esx_Inventoryhud
