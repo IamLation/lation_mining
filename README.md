@@ -1,42 +1,129 @@
-# Lation's Mining
-A fun mining script for FiveM including mining, smelting & selling materials. Everything is configurable. Customize the mining locations, smelting location, selling location. Add more or remove materials, make them "smeltable" and/or "sellable" or not, set a price for each material when selling. Customize how long each material takes to smelt & much more!
+<h1 align="center">
+    <br>
+    <a href="https://lationscripts.com?utm_source=github&utm_medium=free-script"><img src="https://img.lationscripts.com/icons/lation-scripts-logo.png" alt="Lation Scripts logo"><a>
+    <br>
+        Lation Scripts
+    <br>
+</h1>
 
-## Support, Scripts & More
-- [Click here to join our Discord](https://discord.gg/9EbY4nM5uu)
-- [Click here to visit our Store](https://lationscripts.com/?utm_source=github&utm_medium=free-script)
+<h4 align="center">The best mining script available on FiveM.</h4>
 
-## Features
-- Supports ESX & QBCore
-- Highly detailed config file
-- Mine for varied types of ores
-- Preconfigured rarity tables (common, medium & rare) when mining
-- Smelt your mined materials
-- Customize how long each material takes to smelt
-- Choose how much of an item you want to smelt at once
-- Smelt time adjusts in conjuction with quantity smelted
-- Sell your mined and/or smelted materials
-- Set sale price per material
-- Enable or disable mining at night
-- Enable or disable selling mined materials
-- Enable or disable making a specific item "smeltable"
-- Enable or disable making a specific item "sellable"
-- Choose how much of an item you want to sell at once
-- Enable or disablepickaxe breaking
-- Set chance for pickaxe breaking if enabled
-- Anticheat feature to deter autoclicking
-- Set chance for anticheat check if enabled
-- Customize how long a pickaxe will last before breaking (ox_inventory v2.31.0 or later required)
+<p align="center">
+    <img src="https://img.shields.io/github/stars/iamlation/lation_mining?logo=github">
+    <img src="https://img.shields.io/github/downloads/iamlation/lation_mining/total?logo=github&style=social">
+</p>
 
+<p align="center">
+    <a href="#key-features">Key Features</a> •
+    <a href="#dependencies">Dependencies</a> •
+    <a href="#installation">Installation</a> •
+    <a href="#support">Support</a> •
+    <a href="#more-scripts">More Scripts</a>
+</p>
 
-## Dependencies
-- [ox_lib](https://github.com/overextended/ox_lib/releases)
-- [ox_target](https://github.com/overextended/ox_target/releases), [qb-target](https://github.com/qbcore-framework/qb-target) or [qtarget](https://github.com/overextended/ox_target/releases)
+[![lation 247robbery youtube preview](https://img.lationscripts.com/products/lation-mining-thumbnail.jpg)](https://www.youtube.com/watch?v=L5fWSR1G_mA)
 
-## Installation
-- Ensure you have all dependencies installed
-- Add items found in "install" folder to your inventory resource
-- Add lation_mining to your 'resources' directory
-- Add 'ensure lation_mining' in your 'server.cgf'
+## 🔑 Key Features
 
-## Preview
-[Streamable - Lation's Mining](https://streamable.com/q8xp0l)
+* Supports all major FiveM frameworks
+  - [ESX](https://github.com/esx-framework)
+  - [QBCore](https://github.com/qbcore-framework)
+  - [QBox](https://github.com/Qbox-project)
+  - [Ox](https://github.com/overextended)
+* Built-in log support
+  - [Fivemanage](https://fivemanage.com/?utm_source=github&utm_medium=lation)
+  - [Fivemerr](https://fivemerr.com/?utm_source=github&utm_medium=lation)
+  - Discord (not recommended)
+* Supports many notification systems
+  - [ox_lib](https://github.com/overextended/ox_lib)
+  - ESX
+  - QBCore
+  - [okok](https://okok.tebex.io/package/4724993/?utm_source=github&utm_medium=lation)
+  - [Wasabi](https://wasabiscripts.com/product/6215100/?utm_source=github&utm_medium=lation)
+  - [Samuel](https://github.com/Samuels-Development/sd-notify)
+  - & more
+* Locales support by [ox_lib](https://github.com/overextended/ox_lib)
+  - en
+  - (looking for contributors - [learn more](https://github.com/lation-scripts/translations))
+* Built-in XP system
+  - Create as many levels as you wish
+  - Set the required XP to reach each level
+  - Customize how much XP is rewarded for actions
+  - Change what level is required for all actions
+  - Includes tiered pickaxes with durability system
+* Player statistics & leaderboard
+  - Players can view their lifetime statistics (total mined ore, etc)
+  - Customize what stats to display or not (or turn them all off)
+  - Includes a leaderboard displaying top 10 players by XP
+  - Leaderboard can also be disabled if desired
+* Pickaxe durability system
+  - Includes 4 tiers of pickaxes
+  - Customize how fast (or slow) each pickaxe type degrades
+  - Set the level required to use (and purchase) each pickaxe
+* Create unique mining zones
+  - Assign specific prop(s) to each zone
+  - Customize what level is required to mine
+  - Change how long it takes to mine
+  - Reward one or more items with optional chance variable
+  - Customize how long until the ore respawns
+  - .. all these options can be customized per zone
+* Powerful ingot smelting
+  - Smelt your mined ores into ingots
+  - Ability to require multiple ores to create 1 ingot
+  - Customize each ingot smelting process and requirements
+  - Change required level, duration, XP & item(s) rewarded on completion
+* Included "The Mines" shop
+  - Customizable shop to sell pickaxes & more
+  - Ability to add any items for sale
+  - Change hours available, account used for purchases & more
+  - Option to include metadata on items sold
+  - Ability to require a certain mining level to purchase specific items
+  - Assign a blip, ped model, scenario & more
+  - Or disable this shop altogether & use your own
+* Included Pawn Shop
+  - Allow players the ability to earn money for mined ores, ingots, etc
+  - Assign prices received for each item
+  - Or disable this shop altogether & use your own
+  - If you use ox_inventory, we recommend using our dedicated [pawn shop](https://github.com/IamLation/lation_pawnshop) script
+
+## ⚠️ Dependencies
+The following resources are **required** in order to setup this resource:
+* [oxmysql](https://github.com/overextended/oxmysql/releases)
+* [ox_lib](https://github.com/overextended/ox_lib/releases)
+* [ox_target](https://github.com/overextended/ox_target/releases), [qb-target](https://github.com/qbcore-framework/qb-target) or [interact](https://github.com/darktrovx/interact)
+
+## 🖥️ Installation
+
+* **Step 1**
+  - Install (*or ensure you have the latest of*) each dependency listed above
+* **Step 2**
+  - Download the latest release of ```lation_mining```
+* **Step 3**
+  - Extract the zipped folder into your servers main ```resources``` directory
+* **Step 4**
+  - Add ```ensure lation_mining``` in your ```server.cfg``` file *after* all dependencies
+* **Step 5**
+  - Add items & images from ```install``` folder into your inventory resource
+  - There is no need to execute the ```.sql``` file - *the script will auto-insert*
+  - **Do not delete** the install folder or the ```.sql``` file - *or you will get errors*
+* **Step 6**
+  - Restart your server & enjoy!
+
+## ℹ️ Support
+
+If you have any suggestions for new features, discovered a bug or having a problem with the script, feel free to contact us at anytime via:
+* [Discord](https://discord.gg/9EbY4nM5uu)
+* [Email](mailto:support@lationscripts.com)
+
+Or by submitting a new issue on the Github page!
+
+## 👉 More Scripts
+If you've enjoyed (*or are enjoying*) this script, you'd probably really enjoy our other scripts! 
+
+* 🌿 [Advanced Weed Growing](https://lationscripts.com/product/weed-growing?utm_source=github&utm_medium=free-script)
+* 💉 [Advanced Meth Crafting](https://lationscripts.com/product/meth-crafting?utm_source=github&utm_medium=free-script)
+* 🔨 [Advanced Chop Shop](https://lationscripts.com/product/chop-shop?utm_source=github&utm_medium=free-script)
+* 💰 [Advanced Money Laundering](https://lationscripts.com/product/money-wash?utm_source=github&utm_medium=free-script)
+* 🔍 [Advanced Metal Detecting](https://lationscripts.com/product/metal-detecting?utm_source=github&utm_medium=free-script)
+* 🤿 [Advanced Scuba Diving](https://lationscripts.com/product/scuba-diving?utm_source=github&utm_medium=free-script)
+* 💊 [Advanced Drug Sales](https://lationscripts.com/product/drug-selling?utm_source=github&utm_medium=free-script)

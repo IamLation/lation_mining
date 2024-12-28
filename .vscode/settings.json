@@ -28,6 +28,8 @@
         "sellBlip",
         "mineBlip",
         "mineBlips",
-        "createMineZones"
+        "createMineZones",
+        "MySQL",
+        "locale"
     ]
 }

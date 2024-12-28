@@ -1,0 +1,81 @@
+{
+    "notify": {
+        "missing-item": "I am missing something to do this",
+        "not-experienced": "I don't think I'm experienced enough to do this",
+        "missing-pickaxe": "I need a pickaxe I can actually use",
+        "pickaxe-no-durability": "My pickaxe is in terrible condition..",
+        "nighttime": "I don't think I'm permitted to mine at night",
+        "no-money": "You do not have enough money",
+        "no-item": "You do not have enough of this item",
+        "cant-carry": "You cannot carry this much",
+        "max-ingots": "You can only smelt a maximum of %s ingots at a time"
+    },
+    "target": {
+        "mine-ore": "Mine",
+        "mine-shop": "Talk",
+        "smelt-ore": "Smelt"
+    },
+    "textui": {
+        "smelt": "Smelting (%s/%s) - %s%%"
+    },
+    "inputs": {
+        "label": "Quantity",
+        "desc": "How many?"
+    },
+    "player-data": {
+        "level-title": "Mining | Level %s/%s",
+        "level-desc": "You currently have %sXP",
+        "stats-title": "Lifetime Statistics",
+        "stats-desc": "View your lifetime mining statistics",
+        "meta-next-level": "Next Level",
+        "meta-remainder": "Remainder",
+        "meta-maxed-level": "Maxed Level Reached"
+    },
+    "stats-menu": {
+        "main-title": "Lifetime Statistics",
+        "mined-title": "Mined",
+        "mined-desc": "You've mined a total of %s ores",
+        "smelted-title": "Smelted",
+        "smelted-desc": "You've smelted a total of %s ingots",
+        "earned-title": "Earned",
+        "earned-desc": "You've earned a total of $%s"
+    },
+    "mine-menu": {
+        "main-title": "The Mines",
+        "leaderboards-title": "The Leaderboards",
+        "leaderboards-desc": "View the top 10 miners",
+        "shop-title": "The Shop",
+        "shop-desc": "Purchase your mining equipment here",
+        "pawn-title": "Pawn Shop",
+        "pawn-desc": "Sell your ores & more for a profit"
+    },
+    "shop-menu": {
+        "main-title": "The Mines: Shop",
+        "pickaxe-title": "%s | Level %s",
+        "item-desc": "Purchase %s for $%s"
+    },
+    "pawn-menu": {
+        "main-title": "The Mines: Pawn",
+        "item-title": "Sell %s",
+        "item-desc": "Sell %s for $%s"
+    },
+    "leaderboard-menu": {
+        "main-title": "The Mines: Leaderboards",
+        "player-desc": "Level: %s | XP: %s | Total Mined: %s"
+    },
+    "smelt-menu": {
+        "main-title": "Smelting",
+        "ingot-desc": "Requires %s"
+    },
+    "logs": {
+        "mined-title": "Ore Mined",
+        "mined-message": "%s (identifier: %s) has mined a rock for %s",
+        "smelted-title": "Ingot Smelted",
+        "smelted-message": "%s (identifier: %s) has smelted x%d %s",
+        "purchased-title": "Shop Purchase",
+        "purchased-message": "%s (identifier: %s) has purchased x%d %s",
+        "pawned-title": "Pawn Shop Sale",
+        "pawned-message": "%s (identifier: %s) has sold x%d %s"
+    }
+
+}
