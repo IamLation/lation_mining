@@ -95,6 +95,9 @@ local function spawnOre(zoneId, oreId)
             icon = icons.mine,
             iconColor = icons.mine_color,
             distance = 2,
+            canInteract = function()
+                return not IsPedInAnyVehicle(cache.ped, true)
+            end,
             onSelect = function()
                 mineOre(zoneId, oreId)
             end,
