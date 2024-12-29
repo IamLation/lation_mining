@@ -22,7 +22,8 @@ RegisterNetEvent('lation_mining:minedore', function(zoneId, oreId)
     if not ore then return end
 
     ores[zoneId] = ores[zoneId] or {}
-    local status = ores[zoneId][oreId]
+    ores[zoneId][oreId] = ores[zoneId][oreId] or {}
+    local status = ores[zoneId][oreId][source]
     if status and status.time and status.time > os.time() then return end
 
     local coords = GetEntityCoords(GetPlayerPed(source))
@@ -69,7 +70,7 @@ RegisterNetEvent('lation_mining:minedore', function(zoneId, oreId)
     local addXP = math.random(zone.xp.min, zone.xp.max)
     mining:AddPlayerData(source, 'exp', addXP)
 
-    ores[zoneId][oreId] = { time = os.time() + math.floor(zone.respawn / 1000) }
+    ores[zoneId][oreId][source] = { time = os.time() + math.floor(zone.respawn / 1000) }
 
     if server.logs.events.mined then
         local rewards = ''
@@ -88,7 +89,7 @@ CreateThread(function()
             for zoneId, zoneData in pairs(ores) do
                 for oreId, status in pairs(zoneData) do
                     if status.time and status.time <= os.time() then
-                        ores[zoneId][oreId] = nil
+                        ores[zoneId][oreId][source] = nil
                     end
                 end
             end
