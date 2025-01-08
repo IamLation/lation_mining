@@ -1,0 +1,80 @@
+{
+    "notify": {
+        "missing-item": "Me falta algo para hacer esto",
+        "not-experienced": "No creo tener suficiente experiencia para hacer esto",
+        "missing-pickaxe": "Necesito un pico que realmente pueda usar",
+        "pickaxe-no-durability": "Mi pico está en muy mal estado...",
+        "nighttime": "No creo que se me permita minar de noche",
+        "no-money": "No tienes suficiente dinero",
+        "no-item": "No tienes suficiente de este artículo",
+        "cant-carry": "No puedes llevar tanto",
+        "max-ingots": "Solo puedes fundir un máximo de %s lingotes a la vez"
+    },
+    "target": {
+        "mine-ore": "Minar",
+        "mine-shop": "Hablar",
+        "smelt-ore": "Fundir"
+    },
+    "textui": {
+        "smelt": "Fundiendo (%s/%s) - %s%%"
+    },
+    "inputs": {
+        "label": "Cantidad",
+        "desc": "¿Cuántos?"
+    },
+    "player-data": {
+        "level-title": "Minería | Nivel %s/%s",
+        "level-desc": "Actualmente tienes %sXP",
+        "stats-title": "Estadísticas de por vida",
+        "stats-desc": "Consulta tus estadísticas de minería de por vida",
+        "meta-next-level": "Siguiente nivel",
+        "meta-remainder": "Restante",
+        "meta-maxed-level": "Nivel máximo alcanzado"
+    },
+    "stats-menu": {
+        "main-title": "Estadísticas de por vida",
+        "mined-title": "Minado",
+        "mined-desc": "Has minado un total de %s minerales",
+        "smelted-title": "Fundido",
+        "smelted-desc": "Has fundido un total de %s lingotes",
+        "earned-title": "Ganado",
+        "earned-desc": "Has ganado un total de $%s"
+    },
+    "mine-menu": {
+        "main-title": "Las Minas",
+        "leaderboards-title": "Clasificaciones",
+        "leaderboards-desc": "Consulta el top 10 de mineros",
+        "shop-title": "La Tienda",
+        "shop-desc": "Compra aquí tu equipo de minería",
+        "pawn-title": "Casa de empeño",
+        "pawn-desc": "Vende tus minerales y más con beneficio"
+    },
+    "shop-menu": {
+        "main-title": "Las Minas: Tienda",
+        "pickaxe-title": "%s | Nivel %s",
+        "item-desc": "Compra %s por $%s"
+    },
+    "pawn-menu": {
+        "main-title": "Las Minas: Casa de empeño",
+        "item-title": "Vender %s",
+        "item-desc": "Vende %s por $%s"
+    },
+    "leaderboard-menu": {
+        "main-title": "Las Minas: Clasificaciones",
+        "player-desc": "Nivel: %s | XP: %s | Total Minado: %s"
+    },
+    "smelt-menu": {
+        "main-title": "Fundición",
+        "ingot-desc": "Requiere %s"
+    },
+    "logs": {
+        "mined-title": "Mineral Minado",
+        "mined-message": "%s (identificador: %s) ha minado una roca por %s",
+        "smelted-title": "Lingote Fundido",
+        "smelted-message": "%s (identificador: %s) ha fundido x%d %s",
+        "purchased-title": "Compra en Tienda",
+        "purchased-message": "%s (identificador: %s) ha comprado x%d %s",
+        "pawned-title": "Venta en Casa de empeño",
+        "pawned-message": "%s (identificador: %s) ha vendido x%d %s"
+    }
+}

@@ -1,0 +1,80 @@
+{
+    "notify": {
+        "missing-item": "Chybí mi něco, abych to mohl udělat",
+        "not-experienced": "Nemyslím si, že mám dostatek zkušeností na to, abych to udělal",
+        "missing-pickaxe": "Potřebuji krumpáč, který mohu skutečně použít",
+        "pickaxe-no-durability": "Můj krumpáč je ve strašném stavu..",
+        "nighttime": "Nemyslím si, že mám povolení těžit v noci",
+        "no-money": "Nemáš dostatek peněz",
+        "no-item": "Nemáš dostatek tohoto předmětu",
+        "cant-carry": "Nemůžeš unést tolik věcí",
+        "max-ingots": "Můžeš tavit maximálně %s ingotů najednou"
+    },
+    "target": {
+        "mine-ore": "Těžit",
+        "mine-shop": "Mluvit",
+        "smelt-ore": "Tavit"
+    },
+    "textui": {
+        "smelt": "Tavení (%s/%s) - %s%%"
+    },
+    "inputs": {
+        "label": "Množství",
+        "desc": "Kolik?"
+    },
+    "player-data": {
+        "level-title": "Těžba | Úroveň %s/%s",
+        "level-desc": "Aktuálně máš %sXP",
+        "stats-title": "Životní statistiky",
+        "stats-desc": "Zobraz si své celoživotní statistiky těžby",
+        "meta-next-level": "Další úroveň",
+        "meta-remainder": "Zbývá",
+        "meta-maxed-level": "Dosažena maximální úroveň"
+    },
+    "stats-menu": {
+        "main-title": "Životní statistiky",
+        "mined-title": "Vytěženo",
+        "mined-desc": "Celkem jsi vytěžil %s rud",
+        "smelted-title": "Taveno",
+        "smelted-desc": "Celkem jsi vytavil %s ingotů",
+        "earned-title": "Vyděláno",
+        "earned-desc": "Celkem jsi vydělal $%s"
+    },
+    "mine-menu": {
+        "main-title": "Doly",
+        "leaderboards-title": "Žebříčky",
+        "leaderboards-desc": "Zobraz top 10 těžařů",
+        "shop-title": "Obchod",
+        "shop-desc": "Kup si zde své těžební vybavení",
+        "pawn-title": "Zastavárna",
+        "pawn-desc": "Prodej své rudy a další věci se ziskem"
+    },
+    "shop-menu": {
+        "main-title": "Doly: Obchod",
+        "pickaxe-title": "%s | Úroveň %s",
+        "item-desc": "Kup %s za $%s"
+    },
+    "pawn-menu": {
+        "main-title": "Doly: Zastavárna",
+        "item-title": "Prodej %s",
+        "item-desc": "Prodej %s za $%s"
+    },
+    "leaderboard-menu": {
+        "main-title": "Doly: Žebříčky",
+        "player-desc": "Úroveň: %s | XP: %s | Celkem vytěženo: %s"
+    },
+    "smelt-menu": {
+        "main-title": "Tavení",
+        "ingot-desc": "Vyžaduje %s"
+    },
+    "logs": {
+        "mined-title": "Vytěžená ruda",
+        "mined-message": "%s (identifikátor: %s) vytěžil skálu za %s",
+        "smelted-title": "Vytavený ingot",
+        "smelted-message": "%s (identifikátor: %s) vytavil x%d %s",
+        "purchased-title": "Nákup v obchodě",
+        "purchased-message": "%s (identifikátor: %s) zakoupil x%d %s",
+        "pawned-title": "Prodej v zastavárně",
+        "pawned-message": "%s (identifikátor: %s) prodal x%d %s"
+    }
+}
