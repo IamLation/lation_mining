@@ -197,7 +197,7 @@ local function createShop()
             description = locale('shop-menu.item-desc', itemData.label, math.groupdigits(data.price)),
             icon = data.icon or 'fas fa-triangle-exclamation',
             iconColor = data.iconColor or '',
-            image = isPick and 'nui://lation_mining/install/images/'..data.item..'.png' or nil,
+            image = isPick and 'nui://'..ResourceName..'/install/images/'..data.item..'.png' or nil,
             event = 'lation_mining:shops:selectquantity',
             args = id
         }
