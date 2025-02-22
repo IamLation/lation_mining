@@ -9,10 +9,6 @@ local ores = {}
 -- Initialize variable to store inside mine state
 local inside = false
 
--- Localize export
-
--- local mining = exports.lation_mining
-
 -- allow rename of resource without breaking
 local ResourceName = GetCurrentResourceName()
 local mining = exports[ResourceName]
