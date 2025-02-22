@@ -4,7 +4,12 @@ local client = require 'config.client'
 local icons = require 'config.icons'
 
 -- Localize export
-local mining = exports.lation_mining
+
+-- local mining = exports.lation_mining
+
+-- allow rename of resource without breaking
+local ResourceName = GetCurrentResourceName()
+local mining = exports[ResourceName]
 
 -- Initialize table to store shop(s) data
 -- .items, .zone, .ped
