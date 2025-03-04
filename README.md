@@ -43,8 +43,8 @@
   - [Samuel](https://github.com/Samuels-Development/sd-notify)
   - & more
 * Locales support by [ox_lib](https://github.com/overextended/ox_lib)
-  - en
-  - (looking for contributors - [learn more](https://github.com/lation-scripts/translations))
+  - en, es, cs, etc
+  - (looking for contributors - [learn more](https://github.com/IamLation/translations))
 * Built-in XP system
   - Create as many levels as you wish
   - Set the required XP to reach each level
