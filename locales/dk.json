@@ -1,0 +1,80 @@
+{
+    "notify": {
+        "missing-item": "Jeg mangler noget for at kunne gøre dette",
+        "not-experienced": "Jeg tror ikke jeg er erfaren nok til at kunne udføre dette",
+        "missing-pickaxe": "Jeg har brug for en hakke jeg faktisk kan bruge",
+        "pickaxe-no-durability": "Min hakke er i forfærdelig stand..",
+        "nighttime": "Jeg tror ikke jeg har tilladelse til at hakke om natten", 
+        "no-money": "Du har ikke nok penge",
+        "no-item": "Du har ikke nok af denne ting",
+        "cant-carry": "Du kan ikke bære så meget",
+        "max-ingots": "Du kan kun smelte et maksimalt antal af  %s barre ad gangen"
+    },
+    "target": {
+        "mine-ore": "Hak",
+        "mine-shop": "Snak",
+        "smelt-ore": "Smelt"
+    },
+    "textui": {
+        "smelt": "Smelter (%s/%s) - %s%%"
+    },
+    "inputs": {
+        "label": "Mængde",
+        "desc": "Hvor mange?"
+    },
+    "player-data": {
+        "level-title": "Mining | Niveau %s/%s",
+        "level-desc": "Du har lige nu %sXP",
+        "stats-title": "Livstid statistikker",
+        "stats-desc": "Se dine livstids mine statistikker",
+        "meta-next-level": "Næste niveau",
+        "meta-remainder": "Resterende",
+        "meta-maxed-level": "Max niveau opnået"
+    },
+    "stats-menu": {
+        "main-title": "Livstid statistikker",
+        "mined-title": "Hakket",
+        "mined-desc": "Du har hakket en total mængde af %s barre",
+        "smelted-title": "Smeltet",
+        "smelted-desc": "Du har smeltet en total mængde af %s barre",
+        "earned-title": "Optjent",
+        "earned-desc": "Du har optjent $%s"
+    },
+    "mine-menu": {
+        "main-title": "Minerne",
+        "leaderboards-title": "Førertavlen",
+        "leaderboards-desc": "Se de 10 bedste minearbejdere",
+        "shop-title": "Butik",
+        "shop-desc": "Køb dit mine udstyr her",
+        "pawn-title": "Pantelåner",
+        "pawn-desc": "Sælg dine barre & mere for en profit"
+    },
+    "shop-menu": {
+        "main-title": "Minerne: Butik",
+        "pickaxe-title": "%s | Niveau %s",
+        "item-desc": "Køb %s for $%s"
+    },
+    "pawn-menu": {
+        "main-title": "Minerne: Pantelåner",
+        "item-title": "Sælg %s",
+        "item-desc": "Sælg %s for $%s"
+    },
+    "leaderboard-menu": {
+        "main-title": "Minerne: Førertavlen",
+        "player-desc": "Niveau: %s | XP: %s | Totalt hakket: %s"
+    },
+    "smelt-menu": {
+        "main-title": "Smelter",
+        "ingot-desc": "Kræver %s"
+    },
+    "logs": {
+        "mined-title": "Malm hakket",
+        "mined-message": "%s (identifier: %s) har hakket en sten til %s",
+        "smelted-title": "Barre smeltet",
+        "smelted-message": "%s (identifier: %s) har smeltet x%d %s",
+        "purchased-title": "Butik køb",
+        "purchased-message": "%s (identifier: %s) har købt x%d %s",
+        "pawned-title": "Pantelåner salg",
+        "pawned-message": "%s (identifier: %s) har solgt x%d %s"
+    }
+}
