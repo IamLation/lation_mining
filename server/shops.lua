@@ -2,8 +2,9 @@
 local shared = require 'config.shared'
 local server = require 'config.server'
 
--- Localize export
-local mining = exports.lation_mining
+-- allow rename of resource without breaking
+local ResourceName = GetCurrentResourceName()
+local mining = exports[ResourceName]
 
 -- Complete a purchase from The Mines shop
 --- @param itemId number
