@@ -1,0 +1,80 @@
+{
+    "notify": {
+        "missing-item": "Bunu yapmak için bir şeyler eksik",
+        "not-experienced": "Bunu yapacak kadar deneyimli olduğumu sanmıyorum",
+        "missing-pickaxe": "Kullanabileceğim bir kazmaya ihtiyacım var",
+        "pickaxe-no-durability": "Kazmamın durumu berbat...",
+        "nighttime": "Gece madencilik yapmama izin verildiğini sanmıyorum",
+        "no-money": "Yeterli paran yok",
+        "no-item": "Bu eşyadan yeterince yok",
+        "cant-carry": "Bu kadar fazla taşıyamazsın",
+        "max-ingots": "Bir seferde en fazla %s külçe eritilebilir"
+    },
+    "target": {
+        "mine-ore": "Madencilik Yap",
+        "mine-shop": "Konuş",
+        "smelt-ore": "Erit"
+    },
+    "textui": {
+        "smelt": "Eritme işlemi (%s/%s) - %s%%"
+    },
+    "inputs": {
+        "label": "Miktar",
+        "desc": "Kaç tane?"
+    },
+    "player-data": {
+        "level-title": "Madencilik | Seviye %s/%s",
+        "level-desc": "Şu an %sXP'ye sahipsin",
+        "stats-title": "Ömür Boyu İstatistikler",
+        "stats-desc": "Ömür boyu madencilik istatistiklerini görüntüle",
+        "meta-next-level": "Sonraki Seviye",
+        "meta-remainder": "Kalan",
+        "meta-maxed-level": "Maksimum Seviye Erişildi"
+    },
+    "stats-menu": {
+        "main-title": "Ömür Boyu İstatistikler",
+        "mined-title": "Kazılan",
+        "mined-desc": "Toplam %s maden kazdın",
+        "smelted-title": "Eritilen",
+        "smelted-desc": "Toplam %s külçe erittin",
+        "earned-title": "Kazanılan",
+        "earned-desc": "Toplam $%s kazandın"
+    },
+    "mine-menu": {
+        "main-title": "Madenler",
+        "leaderboards-title": "Lider Tabloları",
+        "leaderboards-desc": "En iyi 10 madenciyi görüntüle",
+        "shop-title": "Mağaza",
+        "shop-desc": "Madencilik ekipmanlarını buradan satın al",
+        "pawn-title": "Tefeci Dükkanı",
+        "pawn-desc": "Madenlerini ve daha fazlasını kar için sat"
+    },
+    "shop-menu": {
+        "main-title": "Madenler: Mağaza",
+        "pickaxe-title": "%s | Seviye %s",
+        "item-desc": "%s satın al - $%s"
+    },
+    "pawn-menu": {
+        "main-title": "Madenler: Tefeci",
+        "item-title": "%s Sat",
+        "item-desc": "%s sat - $%s"
+    },
+    "leaderboard-menu": {
+        "main-title": "Madenler: Lider Tabloları",
+        "player-desc": "Seviye: %s | XP: %s | Toplam Kazılan: %s"
+    },
+    "smelt-menu": {
+        "main-title": "Eritme",
+        "ingot-desc": "%s Gerekli"
+    },
+    "logs": {
+        "mined-title": "Kazılan Maden",
+        "mined-message": "%s (identifier: %s), %s madeni kazdı",
+        "smelted-title": "Eritilen Külçe",
+        "smelted-message": "%s (identifier: %s), x%d %s eritti",
+        "purchased-title": "Mağaza Satın Alımı",
+        "purchased-message": "%s (identifier: %s), x%d %s satın aldı",
+        "pawned-title": "Tefeci Dükkanı Satışı",
+        "pawned-message": "%s (identifier: %s), x%d %s sattı"
+    }
+}
