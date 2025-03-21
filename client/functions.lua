@@ -10,7 +10,7 @@ local textui = 'ox_lib'
 --- @param type string
 function ShowNotification(message, type)
     if shared.setup.notify == 'ox_lib' then
-        lib.notify({ description = message, type = type, position = 'top', icon = 'fas fa-fire' })
+        lib.notify({ description = message, type = type, position = shared.setup.oxlibposition, icon = 'fas fa-fire' })
     elseif shared.setup.notify == 'esx' then
         ESX.ShowNotification(message)
     elseif shared.setup.notify == 'qb' then

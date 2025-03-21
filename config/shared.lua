@@ -26,7 +26,9 @@ return {
         -- Set your notification system below
         -- Available options are: 'ox_lib', 'esx', 'qb', 'okok', 'sd-notify', 'wasabi_notify' & 'custom'
         -- 'custom' needs to be added to client/functions.lua
+        -- only change oxlibposition when you use ox_lib as notify system.
         notify = 'ox_lib',
+        oxlibposition = 'center-right',
         -- Set your progress bar system below
         -- Available options are: 'ox_lib', 'qbcore' & 'custom'
         -- 'custom' needs to be added to client/functions.lua
