@@ -38,8 +38,6 @@ local function InitializeInventory()
         Inventory = 'codem-inventory'
     elseif GetResourceState('core_inventory') == 'started' then
         Inventory = 'core_inventory'
-    elseif GetResourceState('tgiann-inventory') == 'started' then
-        Inventory = 'tgiann-inventory'
     else
         -- Add custom inventory here
     end
@@ -142,8 +140,6 @@ function GetItemCount(source, item)
     if not player then return 0 end
     if Inventory then
         if Inventory == 'ox_inventory' then
-            return exports[Inventory]:Search(source, 'count', item) or 0
-        elseif Inventory == 'tgiann-inventory' then
             return exports[Inventory]:Search(source, 'count', item) or 0
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:getItemCount(source, item)
@@ -287,8 +283,6 @@ function CanCarry(source, item, count)
         elseif Inventory == 'core_inventory' then
             -- Core's canCarry export not working as expected, just return true
             return true
-        elseif Inventory == 'tgiann-inventory' then
-            return exports[Inventory]:CanCarryItem(source, item, amount)
         else
             -- Add custom inventory here
             return true

@@ -111,8 +111,6 @@ local function InitializeInventory()
         Inventory = 'codem-inventory'
     elseif GetResourceState('core_inventory') == 'started' then
         Inventory = 'core_inventory'
-    elseif GetResourceState('tgiann-inventory') == 'started' then
-        Inventory = 'tgiann-inventory'
     else
         -- Add custom inventory here
     end
@@ -149,8 +147,6 @@ function GetPlayerInventory()
             return exports[Inventory]:GetInventory()
         elseif Inventory == 'codem-inventory' then
             return exports[Inventory]:GetClientPlayerInventory()
-        elseif Inventory == 'tgiann-inventory' then
-            return exports[Inventory]:GetPlayerItems()
         end
     else
         if Framework == 'esx' then
@@ -186,8 +182,6 @@ function GetItemData(item)
             local items = exports['codem-inventory']:GetItemList()
             if not items then return end
             return items[item]
-        elseif Inventory == 'tgiann-inventory' then
-            return exports['tgiann-inventory']:GetItemList(item)
         elseif Inventory == 'core_inventory' then
             -- No available client-side export to get item list
             if Framework == 'qb' then
