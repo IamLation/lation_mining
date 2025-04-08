@@ -6,6 +6,9 @@ local icons      = require 'config.icons'
 -- Initialize table to store ores
 local ores       = {}
 
+-- Initialize table to store mines
+local mines = {}
+
 -- Initialize variable to store inside mine state
 local inside     = false
 local insideMine = nil
@@ -172,7 +175,7 @@ end)
 -- Setup on player loaded
 AddEventHandler('lation_mining:onPlayerLoaded', function()
     for mineId, data in pairs(shared.mining) do
-        lib.zones.sphere({
+        local zone = lib.zones.sphere({
             coords = data.center,
             radius = 400,
             onEnter = function()
@@ -185,6 +188,7 @@ AddEventHandler('lation_mining:onPlayerLoaded', function()
             end,
             debug = shared.setup.debug
         })
+        mines[mineId] = zone
     end
 end)
 
@@ -202,5 +206,11 @@ AddEventHandler('onResourceStop', function(resourceName)
             ores[mineId][zoneId] = nil
         end
         ores[mineId] = nil
+    end
+    for mineId, zone in pairs(mines) do
+        if zone  then
+            zone:remove()
+        end
+        mines[mineId] = nil
     end
 end)
