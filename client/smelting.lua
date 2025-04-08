@@ -9,6 +9,12 @@ local mining = exports.lation_mining
 -- Initialize table to store smelting menu
 local menu = {}
 
+-- Initialize table to store smelter zones
+local smelters = {}
+
+-- Initialize variable to track if player is inside smelting zone
+local inside = nil
+
 -- Initialize boolean to track smelting state
 local smelting = false
 
@@ -106,7 +112,7 @@ local function startSmelting(ingotId, count)
         end
 
         smelted += 1
-        TriggerServerEvent('lation_mining:completesmelt', ingotId)
+        TriggerServerEvent('lation_mining:completesmelt', ingotId, inside)
     end
 
     ClearPedTasks(cache.ped)
@@ -136,41 +142,58 @@ end)
 
 -- Setup on player loaded
 AddEventHandler('lation_mining:onPlayerLoaded', function()
-    lib.zones.sphere({
-        coords = shared.smelting.coords,
-        radius = 200,
-        onEnter = function()
-            AddCircleZone({
-                coords = shared.smelting.coords,
-                name = 'smelt-zone',
-                radius = 3,
-                debug = shared.setup.debug,
-                options = {
-                    {
-                        name = 'smelt-zone',
-                        label = locale('target.smelt-ore'),
-                        icon = icons.smelt,
-                        iconColor = icons.smelt_color,
-                        distance = 2,
-                        canInteract = function()
-                            if smelting then return false end
-                            return true
-                        end,
-                        onSelect = function()
-                            lib.showContext('smelt-menu')
-                        end,
-                        action = function()
-                            lib.showContext('smelt-menu')
-                        end
+    for smelterId, coords in pairs(shared.smelting.coords) do
+        local zone = lib.zones.sphere({
+            coords = coords,
+            radius = 15,
+            onEnter = function()
+                inside = smelterId
+                AddCircleZone({
+                    coords = coords,
+                    name = 'smelt-zone'..smelterId,
+                    radius = 3,
+                    debug = shared.setup.debug,
+                    options = {
+                        {
+                            name = 'smelt-zone'..smelterId,
+                            label = locale('target.smelt-ore'),
+                            icon = icons.smelt,
+                            iconColor = icons.smelt_color,
+                            distance = 2,
+                            canInteract = function()
+                                if smelting then return false end
+                                return true
+                            end,
+                            onSelect = function()
+                                lib.showContext('smelt-menu')
+                            end,
+                            action = function()
+                                lib.showContext('smelt-menu')
+                            end
+                        }
                     }
-                }
-            })
-        end,
-        onExit = function()
-            RemoveCircleZone('smelt-zone')
-        end,
-        debug = shared.setup.debug
-    })
+                })
+            end,
+            onExit = function()
+                inside = nil
+                RemoveCircleZone('smelt-zone'..smelterId)
+            end,
+            debug = shared.setup.debug
+        })
+        smelters[smelterId] = zone
+        createBlip(coords, shared.smelting.blip)
+    end
     buildMenu()
-    createBlip(shared.smelting.coords, shared.smelting.blip)
+end)
+
+-- Cleanup on resource stop
+--- @param resourceName string
+AddEventHandler('onResourceStop', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+    for smelterId, zone in pairs(smelters) do
+        if zone  then
+            zone:remove()
+        end
+        smelters[smelterId] = nil
+    end
 end)
