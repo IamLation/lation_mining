@@ -13,16 +13,13 @@ local ores = {}
 --- @param oreId number
 RegisterNetEvent('lation_mining:minedore', function(mineId, zoneId, oreId)
     if not source or not mineId or not zoneId or not oreId then return end
-    print('mined ore', mineId, zoneId, oreId, source)
     local source = source
 
     local zone = shared.mining[mineId].zones[zoneId]
     if not zone then return end
-    print('zone', zone)
 
     local ore = zone.ores[oreId]
     if not ore then return end
-    print('ore', ore)
 
     ores[mineId] = ores[mineId] or {}
     ores[mineId][zoneId] = ores[mineId][zoneId] or {}
