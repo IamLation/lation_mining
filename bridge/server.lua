@@ -143,6 +143,9 @@ function GetItemCount(source, item)
             return exports[Inventory]:Search(source, 'count', item) or 0
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:getItemCount(source, item)
+        elseif Inventory == 'origen_inventory' then
+            -- Origen has depricated the GetItemByName export, so we need to use the getItemCount export instead
+            return exports[Inventory]:getItemCount(source, item) or 0
         else
             local itemData = exports[Inventory]:GetItemByName(source, item)
             if not itemData then return 0 end
@@ -275,8 +278,7 @@ function CanCarry(source, item, count)
             end
             return false
         elseif Inventory == 'origen_inventory' then
-            -- origen's CanCarry export not working as expected, just return true
-            return true
+            return exports[Inventory]:canCarryItem(source, item, count)
         elseif Inventory == 'codem-inventory' then
             -- CodeM docs dont specify an export for this so..
             return true
