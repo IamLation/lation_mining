@@ -31,8 +31,8 @@ function GetMetadata(source, item)
         return data.info
     elseif Inventory == 'origen_inventory' then
         local data = exports[Inventory]:getItem(source, item, false, false)
-        if not data then return end
-        return data.metadata
+        if not data or #data == 0 then return end
+        return data[1].metadata
     else
         local data = exports[Inventory]:GetItemByName(source, item)
         if not data then return end
@@ -68,9 +68,9 @@ function SetMetadata(source, item, metatype, metavalue)
         exports[Inventory]:setMetadata(source, slot, itemData.info)
     elseif Inventory == 'origen_inventory' then
         local itemData = exports[Inventory]:getItem(source, item, false, false)
-        if not itemData then return end
-        itemData.metadata[metatype] = metavalue
-        exports[Inventory]:setMetadata(source, itemData.slot, itemData.metadata)
+        if not next(itemData) then return end
+        itemData[1].metadata[metatype] = metavalue
+        exports[Inventory]:setMetadata(source, itemData[1].slot, itemData[1].metadata)
     else
         local itemData = exports[Inventory]:GetItemByName(source, item)
         if not itemData then return end
