@@ -195,7 +195,7 @@ function GetItemData(item)
     else
         if Framework == 'esx' then
             -- Unlikely to need anything here but.. just in case..
-            print('^1[ERROR]: An error has occured with lation_meth - please contact support^0')
+            print('^1[ERROR]: An error has occured with lation_mining - please contact support^0')
         elseif Framework == 'qb' then
             return QBCore.Shared.Items[item]
         elseif Framework == 'qbx' then
