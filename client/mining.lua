@@ -92,7 +92,6 @@ local function spawnOre(mineId, zoneId, oreId)
     local groundFound, groundZ = GetGroundZFor_3dCoord(ore.x, ore.y, ore.z, false)
     local oreZ = groundFound and groundZ or ore.z
     local entity = CreateObject(model, ore.x, ore.y, oreZ, false, false, false)
-    print(ore.x, ore.y, ore.z, oreZ, groundFound)
     PlaceObjectOnGroundProperly(entity)
     FreezeEntityPosition(entity, true)
     AddTargetEntity(entity, {
