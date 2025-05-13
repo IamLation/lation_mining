@@ -327,7 +327,7 @@ function AddItem(source, item, count, metadata)
         elseif Inventory == 'core_inventory' then
             exports[Inventory]:addItem(source, item, count, metadata)
         elseif Inventory == 'qs-inventory' then
-            exports[Inventory]:AddItem(source, item, count, false, metadata)s
+            exports[Inventory]:AddItem(source, item, count, false, metadata)
         elseif Inventory == 'origen_inventory' then
             local success, msgOrItem = exports.origen_inventory:addItem(source, item, count, metadata)
             if not success then
