@@ -143,6 +143,8 @@ function GetItemCount(source, item)
             return exports[Inventory]:Search(source, 'count', item) or 0
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:getItemCount(source, item)
+        elseif Inventory == 'qs-inventory' then
+            return exports[Inventory]:GetItemTotalAmount(source, item)
         elseif Inventory == 'origen_inventory' then
             -- Origen has depricated the GetItemByName export, so we need to use the getItemCount export instead
             return exports[Inventory]:getItemCount(source, item) or 0
