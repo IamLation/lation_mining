@@ -216,6 +216,8 @@ function HasItem(item, amount)
             return exports[Inventory]:Search('count', item) >= amount
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:hasItem(item, amount)
+        elseif Inventory == 'qs-inventory' then
+            return exports[Inventory]:Search(item) >= amount
         elseif Inventory == 'origen_inventory' then
             return exports[Inventory]:Search('count', item) >= amount
         else

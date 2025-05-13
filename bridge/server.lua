@@ -324,6 +324,8 @@ function AddItem(source, item, count, metadata)
             exports[Inventory]:AddItem(source, item, count, metadata)
         elseif Inventory == 'core_inventory' then
             exports[Inventory]:addItem(source, item, count, metadata)
+        elseif Inventory == 'qs-inventory' then
+            exports[Inventory]:AddItem(source, item, count, false, metadata)s
         elseif Inventory == 'origen_inventory' then
             local success, msgOrItem = exports.origen_inventory:addItem(source, item, count, metadata)
             if not success then
@@ -357,6 +359,8 @@ function RemoveItem(source, item, count)
     if Inventory then
         if Inventory == 'core_inventory' then
             exports[Inventory]:removeItem(source, item, count)
+        elseif Inventory == 'qs-inventory' then
+            exports[Inventory]:RemoveItem(source, item, count)
         else
             exports[Inventory]:RemoveItem(source, item, count)
             if Framework == 'qb' then
