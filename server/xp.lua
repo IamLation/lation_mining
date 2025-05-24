@@ -62,6 +62,11 @@ local function GetPlayerData(source, type)
     return data
 end
 
+-- Return xp data
+local function getLevelData()
+    return shared.experience
+end
+
 -- Modify player data
 --- @param source number
 --- @param dataType string
@@ -166,3 +171,5 @@ end)
 -- Register export(s)
 exports('GetPlayerData', GetPlayerData) -- returns player data from lation_mining table (params: source, type) (type param optional)
 exports('AddPlayerData', AddPlayerData) -- edit player data in lation_mining table (params: source, type, amount)
+exports('GetLevelData', getLevelData) -- returns level data from shared.experience table
+exports('getLevelData', getLevelData) -- alias for GetLevelData

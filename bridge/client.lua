@@ -201,7 +201,7 @@ function GetItemData(item)
     else
         if Framework == 'esx' then
             -- Unlikely to need anything here but.. just in case..
-            print('^1[ERROR]: An error has occured with lation_meth - please contact support^0')
+            print('^1[ERROR]: An error has occured with lation_mining - please contact support^0')
         elseif Framework == 'qb' then
             return QBCore.Shared.Items[item]
         elseif Framework == 'qbx' then
@@ -222,6 +222,10 @@ function HasItem(item, amount)
             return exports[Inventory]:Search('count', item) >= amount
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:hasItem(item, amount)
+        elseif Inventory == 'qs-inventory' then
+            return exports[Inventory]:Search(item) >= amount
+        elseif Inventory == 'origen_inventory' then
+            return exports[Inventory]:Search('count', item) >= amount
         else
             return exports[Inventory]:HasItem(item, amount)
         end
