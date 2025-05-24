@@ -144,7 +144,7 @@ function GetItemCount(source, item)
         if Inventory == 'ox_inventory' then
             return exports[Inventory]:Search(source, 'count', item) or 0
         elseif Inventory == 'tgiann-inventory' then
-            return exports[Inventory]:Search(source, 'count', item) or 0
+            return exports[Inventory]:GetItemCount(source, item)
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:getItemCount(source, item)
         else
@@ -288,7 +288,7 @@ function CanCarry(source, item, count)
             -- Core's canCarry export not working as expected, just return true
             return true
         elseif Inventory == 'tgiann-inventory' then
-            return exports[Inventory]:CanCarryItem(source, item, amount)
+            return exports[Inventory]:CanCarryItem(source, item, count)
         else
             -- Add custom inventory here
             return true

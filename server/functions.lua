@@ -37,7 +37,7 @@ function GetMetadata(source, item)
 end
 
 -- Set an items metadata
---- @param source number Player ID 
+--- @param source number Player ID
 --- @param item string Item name
 --- @param metatype string Metadata type
 --- @param metavalue any Metadata value
@@ -62,6 +62,11 @@ function SetMetadata(source, item, metatype, metavalue)
         if not slot then return end
         itemData.info[metatype] = metavalue
         exports[Inventory]:setMetadata(source, slot, itemData.info)
+    elseif Inventory == 'tgiann-inventory' then
+        local itemData = exports[Inventory]:GetItemByName(source, item)
+        if not itemData then return end
+        itemData.info[metaType] = metaValue
+        exports[Inventory]:SetItemData(source, item, itemData.slot, itemData.info)
     else
         local itemData = exports[Inventory]:GetItemByName(source, item)
         if not itemData then return end
