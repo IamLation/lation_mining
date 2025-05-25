@@ -187,7 +187,9 @@ function GetItemData(item)
             if not items then return end
             return items[item]
         elseif Inventory == 'tgiann-inventory' then
-            return exports['tgiann-inventory']:GetItemList(item)
+            local items = exports[Inventory]:GetItemList()
+            if not items then return end
+            return items[item]
         elseif Inventory == 'core_inventory' then
             -- No available client-side export to get item list
             if Framework == 'qb' then
