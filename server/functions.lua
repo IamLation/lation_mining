@@ -71,6 +71,11 @@ function SetMetadata(source, item, metatype, metavalue)
         if not next(itemData) then return end
         itemData[1].metadata[metatype] = metavalue
         exports[Inventory]:setMetadata(source, itemData[1].slot, itemData[1].metadata)
+    elseif Inventory == 'tgiann-inventory' then
+        local itemData = exports[Inventory]:GetItemByName(source, item)
+        if not itemData then return end
+        itemData.info[metaType] = metaValue
+        exports[Inventory]:SetItemData(source, item, itemData.slot, itemData.info)
     else
         local itemData = exports[Inventory]:GetItemByName(source, item)
         if not itemData then return end
