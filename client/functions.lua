@@ -100,7 +100,7 @@ function ProgressBar(data)
 end
 
 -- Display TextUI
---- @param text string 
+--- @param text string
 --- @param icon string
 function ShowTextUI(text, icon)
     if textui == 'ox_lib' then
@@ -223,6 +223,8 @@ end
 function GetDurabilityType()
     if Inventory == 'ox_inventory' then
         return 'durability'
+    elseif Inventory == 'tgiann-inventory' then
+        return 'durabilityPercent'
     else
         return 'quality'
     end
