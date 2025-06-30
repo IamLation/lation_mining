@@ -36,6 +36,7 @@
   - Discord (not recommended)
 * Supports many notification systems
   - [ox_lib](https://github.com/overextended/ox_lib)
+  - [Lation](https://lationscripts.com/product/modern-ui?utm_source=github&utm_medium=free-script)
   - ESX
   - QBCore
   - [okok](https://okok.tebex.io/package/4724993/?utm_source=github&utm_medium=lation)
@@ -128,3 +129,4 @@ If you've enjoyed (*or are enjoying*) this script, you'd probably really enjoy o
 * 🔍 [Advanced Metal Detecting](https://lationscripts.com/product/metal-detecting?utm_source=github&utm_medium=free-script)
 * 🤿 [Advanced Scuba Diving](https://lationscripts.com/product/scuba-diving?utm_source=github&utm_medium=free-script)
 * 💊 [Advanced Drug Sales](https://lationscripts.com/product/drug-selling?utm_source=github&utm_medium=free-script)
+* ⚙️ [Modern UI](https://lationscripts.com/product/modern-ui?utm_source=github&utm_medium=free-script)
