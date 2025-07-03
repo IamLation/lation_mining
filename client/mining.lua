@@ -30,10 +30,10 @@ local function mineOre(zoneId, oreId)
         return
     end
 
-    local pickaxe, item = false, nil
+    local pickaxe, data = false, {}
     for pick_level, pick_data in pairs(shared.pickaxes) do
         if pick_level <= level and HasItem(pick_data.item, 1) then
-            pickaxe, item = true, pick_data.item
+            pickaxe, data = true, pick_data
             break
         end
     end
@@ -42,10 +42,8 @@ local function mineOre(zoneId, oreId)
         return
     end
 
-    local metadata = lib.callback.await('lation_mining:getmetadata', false, item)
-    local metatype = GetDurabilityType()
-    local degrade = shared.pickaxes[level].degrade
-    if not metadata or not metadata[metatype] or metadata[metatype] < degrade then
+    local metadata, metatype = lib.callback.await('lation_mining:getmetadata', false, data.item), GetDurabilityType()
+    if not metadata or not metadata[metatype] or metadata[metatype] < data.degrade then
         ShowNotification(locale('notify.pickaxe-no-durability'), 'error')
         return
     end
