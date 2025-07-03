@@ -113,7 +113,10 @@ return {
                 -- price: price of item
                 -- icon: icon for item
                 -- metadata: optional metadata for item
-                -- metadata: ⚠️ use 'durability' if using ox_inventory, otherwise use 'quality'
+                -- metadata: ⚠️
+                -- ⚠️   use 'durability' if using ox_inventory
+                -- ⚠️   use 'durabilityPercent' if using tgiann-inventory
+                -- ⚠️   use 'quality' for everything else
                 -- level: optional player level requirement to purchase item
                 [1] = { item = 'ls_pickaxe', price = 150, icon = 'hammer', metadata = { ['durability'] = 100 }, level = 1 },
                 [2] = { item = 'ls_copper_pickaxe', price = 300, icon = 'hammer', metadata = { ['durability'] = 100 }, level = 2 },
