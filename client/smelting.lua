@@ -52,7 +52,7 @@ local function buildMenu()
         }
     end
 
-    lib.registerContext({
+    RegisterMenu({
         id = 'smelt-menu',
         title = locale('smelt-menu.main-title'),
         options = menu
@@ -126,14 +126,17 @@ AddEventHandler('lation_mining:smelting:selectquantity', function(ingotId)
     if not ingotId then return end
     local ingot = shared.smelting.ingots[ingotId]
     if not ingot then return end
-    local input = lib.inputDialog(ingot.name, {
-        {
-            type = 'number',
-            icon = icons.input_quantity,
-            label = locale('inputs.label'),
-            description = locale('inputs.desc'),
-            default = 1,
-            require = true
+    local input = ShowInput({
+        title = ingot.name,
+        options = {
+            {
+                type = 'number',
+                icon = icons.input_quantity,
+                label = locale('inputs.label'),
+                description = locale('inputs.desc'),
+                default = 1,
+                require = true
+            }
         }
     })
     if not input or not input[1] then return end
@@ -165,10 +168,10 @@ AddEventHandler('lation_mining:onPlayerLoaded', function()
                                 return true
                             end,
                             onSelect = function()
-                                lib.showContext('smelt-menu')
+                                ShowMenu('smelt-menu')
                             end,
                             action = function()
-                                lib.showContext('smelt-menu')
+                                ShowMenu('smelt-menu')
                             end
                         }
                     }
