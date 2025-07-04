@@ -10,12 +10,14 @@ local players = {}
 
 -- Complete smelting action
 --- @param ingotId number
-RegisterNetEvent('lation_mining:completesmelt', function(ingotId)
-    if not source or not ingotId then return end
+RegisterNetEvent('lation_mining:completesmelt', function(ingotId, inside)
+    if not source or not ingotId or not inside then return end
     local source = source
 
     local ingot = shared.smelting.ingots[ingotId]
     if not ingot then return end
+
+    if not shared.smelting.coords[inside] then return end
 
     local hasItems = true
     for _, req in pairs(ingot.required) do
@@ -29,7 +31,7 @@ RegisterNetEvent('lation_mining:completesmelt', function(ingotId)
         return
     end
 
-    local dist = #(shared.smelting.coords - GetEntityCoords(GetPlayerPed(source))) <= 15
+    local dist = #(shared.smelting.coords[inside] - GetEntityCoords(GetPlayerPed(source))) <= 15
     if not dist then return end
 
     local canCarry = true

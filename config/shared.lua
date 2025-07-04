@@ -291,7 +291,9 @@ return {
 
     smelting = {
         -- Where do you want the smelter to be?
-        coords = vec3(1087.6827, -2002.1394, 31.4841),
+        coords = {
+            vec3(1087.6827, -2002.1394, 31.4841),
+        },
         -- The types of ingots that can be smelted from ores
         ingots = {
             [1] = {
