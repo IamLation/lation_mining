@@ -2,15 +2,17 @@
 local shared = require 'config.shared'
 
 -- You can change the textUI script here
--- Options: ox_lib, jg-textui, okokTextUI, qbcore & custom
+-- Options: 'lation_ui', 'ox_lib', 'jg-textui', 'okokTextUI', 'qbcore' & 'custom'
 local textui = 'ox_lib'
 
 -- Display a notification
 --- @param message string
 --- @param type string
 function ShowNotification(message, type)
-    if shared.setup.notify == 'ox_lib' then
-        lib.notify({ description = message, type = type, position = 'top', icon = 'fas fa-fire' })
+    if shared.setup.notify == 'lation_ui' then
+        exports.lation_ui:notify({ title = 'Mining', message = message, type = type, icon = 'fas fa-fire' })
+    elseif shared.setup.notify == 'ox_lib' then
+        lib.notify({ description = message, type = type, icon = 'fas fa-fire' })
     elseif shared.setup.notify == 'esx' then
         ESX.ShowNotification(message)
     elseif shared.setup.notify == 'qb' then
@@ -33,19 +35,34 @@ RegisterNetEvent('lation_mining:notify', function(message, type)
     ShowNotification(message, type)
 end)
 
--- Display a minigame
---- @param data table
-function Minigame(data)
-    if lib.skillCheck(data.difficulty, data.inputs) then
-        return true
-    end
-    return false
-end
-
 -- Display a progress bar
 --- @param data table
 function ProgressBar(data)
-    if shared.setup.progress == 'ox_lib' then
+    if shared.setup.progress == 'lation_ui' then
+        if exports.lation_ui:progressBar({
+            label = data.label,
+            description = data.description or nil,
+            icon = data.icon or nil,
+            duration = data.duration,
+            useWhileDead = data.useWhileDead,
+            canCancel = data.canCancel,
+            disable = data.disable,
+            anim = {
+                dict = data.anim.dict or nil,
+                clip = data.anim.clip or nil,
+                flag = data.anim.flag or nil
+            },
+            prop = {
+                model = data.prop.model or nil,
+                bone = data.prop.bone or nil,
+                pos = data.prop.pos or nil,
+                rot = data.prop.rot or nil
+            }
+        }) then
+            return true
+        end
+        return false
+    elseif shared.setup.progress == 'ox_lib' then
         -- Want to use ox_lib's progress circle instead of bar?
         -- Change "progressBar" to "progressCircle" below & done!
         if lib.progressBar({
@@ -99,11 +116,59 @@ function ProgressBar(data)
     end
 end
 
+-- Register menu
+--- @param data table
+function RegisterMenu(data)
+    if shared.setup.menu == 'lation_ui' then
+        exports.lation_ui:registerMenu(data)
+    elseif shared.setup.menu == 'ox_lib' then
+        lib.registerContext(data)
+    elseif shared.setup.menu == 'custom' then
+        -- Add 'custom' menu system here
+    end
+end
+
+-- Show menu
+--- @param menuId string
+function ShowMenu(menuId)
+    if shared.setup.menu == 'lation_ui' then
+        exports.lation_ui:showMenu(menuId)
+    elseif shared.setup.menu == 'ox_lib' then
+        lib.showContext(menuId)
+    elseif shared.setup.menu == 'custom' then
+        -- Add 'custom' menu system here
+    end
+end
+
+-- Show input dialog
+--- @param data table
+function ShowInput(data)
+    if shared.setup.dialogs == 'lation_ui' then
+        return exports.lation_ui:input({
+            title = data.title,
+            subtitle = data.subtitle,
+            submitText = data.submitText,
+            cancelText = data.cancelText,
+            type = data.type,
+            options = data.options
+        })
+    elseif shared.setup.dialogs == 'ox_lib' then
+        return lib.inputDialog(data.title, data.options)
+    elseif shared.setup.dialogs == 'custom' then
+        -- Add your custom input dialog here
+    end
+end
+
 -- Display TextUI
 --- @param text string 
 --- @param icon string
 function ShowTextUI(text, icon)
-    if textui == 'ox_lib' then
+    if textui == 'lation_ui' then
+        exports.lation_ui:showText({
+            description = text,
+            icon = icon,
+        })
+    elseif textui == 'ox_lib' then
         lib.showTextUI(text, {
             position = 'left-center',
             icon = icon
@@ -122,7 +187,12 @@ end
 -- Hide TextUI
 --- @param label string
 function HideTextUI(label)
-    if textui == 'ox_lib' then
+    if textui == 'lation_ui' then
+        local isOpen, text = exports.lation_ui:isOpen()
+        if isOpen and text == label then
+            exports.lation_ui:hideText()
+        end
+    elseif textui == 'ox_lib' then
         local isOpen, text = lib.isTextUIOpen()
         if isOpen and text == label then
             lib.hideTextUI()

@@ -24,14 +24,20 @@ return {
         -- 'custom' needs to be added to client/functions.lua
         interact = 'ox_target',
         -- Set your notification system below
-        -- Available options are: 'ox_lib', 'esx', 'qb', 'okok', 'sd-notify', 'wasabi_notify' & 'custom'
+        -- Available options are: 'lation_ui', 'ox_lib', 'esx', 'qb', 'okok', 'sd-notify', 'wasabi_notify' & 'custom'
         -- 'custom' needs to be added to client/functions.lua
         notify = 'ox_lib',
         -- Set your progress bar system below
-        -- Available options are: 'ox_lib', 'qbcore' & 'custom'
+        -- Available options are: 'lation_ui', 'ox_lib', 'qbcore' & 'custom'
         -- 'custom' needs to be added to client/functions.lua
         -- Any custom progress bar must also support animations
         progress = 'ox_lib',
+        -- Set your context menu system below
+        -- Available options are: 'lation_ui', 'ox_lib' & 'custom'
+        menu = 'ox_lib',
+        -- Set your dialog system below
+        -- Available options are: 'lation_ui', 'ox_lib' & 'custom'
+        dialogs = 'ox_lib',
         -- Do you want to be notified via server console if an update is available?
         -- True if yes, false if no
         version = true,
