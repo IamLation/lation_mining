@@ -9,6 +9,8 @@ local fmsdk = GetResourceState('fmsdk') == 'started'
 function GetDurabilityType()
     if Inventory == 'ox_inventory' then
         return 'durability'
+    elseif Inventory == 'tgiann-inventory' then
+        return 'durabilityPercent'
     else
         return 'quality'
     end
@@ -71,6 +73,11 @@ function SetMetadata(source, item, metatype, metavalue)
         if not next(itemData) then return end
         itemData[1].metadata[metatype] = metavalue
         exports[Inventory]:setMetadata(source, itemData[1].slot, itemData[1].metadata)
+    elseif Inventory == 'tgiann-inventory' then
+        local itemData = exports[Inventory]:GetItemByName(source, item)
+        if not itemData then return end
+        itemData.info[metatype] = metavalue
+        exports[Inventory]:SetItemData(source, item, itemData.slot, itemData.info)
     else
         local itemData = exports[Inventory]:GetItemByName(source, item)
         if not itemData then return end
