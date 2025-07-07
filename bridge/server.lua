@@ -143,6 +143,11 @@ function GetItemCount(source, item)
             return exports[Inventory]:Search(source, 'count', item) or 0
         elseif Inventory == 'core_inventory' then
             return exports[Inventory]:getItemCount(source, item)
+        elseif Inventory == 'qs-inventory' then
+            return exports[Inventory]:GetItemTotalAmount(source, item)
+        elseif Inventory == 'origen_inventory' then
+            -- Origen has depricated the GetItemByName export, so we need to use the getItemCount export instead
+            return exports[Inventory]:getItemCount(source, item) or 0
         else
             local itemData = exports[Inventory]:GetItemByName(source, item)
             if not itemData then return 0 end
@@ -275,8 +280,7 @@ function CanCarry(source, item, count)
             end
             return false
         elseif Inventory == 'origen_inventory' then
-            -- origen's CanCarry export not working as expected, just return true
-            return true
+            return exports[Inventory]:canCarryItem(source, item, count)
         elseif Inventory == 'codem-inventory' then
             -- CodeM docs dont specify an export for this so..
             return true
@@ -322,6 +326,14 @@ function AddItem(source, item, count, metadata)
             exports[Inventory]:AddItem(source, item, count, metadata)
         elseif Inventory == 'core_inventory' then
             exports[Inventory]:addItem(source, item, count, metadata)
+        elseif Inventory == 'qs-inventory' then
+            exports[Inventory]:AddItem(source, item, count, false, metadata)
+        elseif Inventory == 'origen_inventory' then
+            local success, msgOrItem = exports.origen_inventory:addItem(source, item, count, metadata)
+            if not success then
+                print('^1[ERROR]: Failed to add item to inventory: '.. msgOrItem.. '^0')
+                return
+            end
         else
             exports[Inventory]:AddItem(source, item, count, nil, metadata)
             if Framework == 'qb' then
@@ -349,6 +361,8 @@ function RemoveItem(source, item, count)
     if Inventory then
         if Inventory == 'core_inventory' then
             exports[Inventory]:removeItem(source, item, count)
+        elseif Inventory == 'qs-inventory' then
+            exports[Inventory]:RemoveItem(source, item, count)
         else
             exports[Inventory]:RemoveItem(source, item, count)
             if Framework == 'qb' then

@@ -29,6 +29,10 @@ function GetMetadata(source, item)
         local data = exports[Inventory]:getItem(source, item)
         if not data then return end
         return data.info
+    elseif Inventory == 'origen_inventory' then
+        local data = exports[Inventory]:getItem(source, item, false, false)
+        if not data or #data == 0 then return end
+        return data[1].metadata
     else
         local data = exports[Inventory]:GetItemByName(source, item)
         if not data then return end
@@ -37,7 +41,7 @@ function GetMetadata(source, item)
 end
 
 -- Set an items metadata
---- @param source number Player ID 
+--- @param source number Player ID
 --- @param item string Item name
 --- @param metatype string Metadata type
 --- @param metavalue any Metadata value
@@ -62,6 +66,11 @@ function SetMetadata(source, item, metatype, metavalue)
         if not slot then return end
         itemData.info[metatype] = metavalue
         exports[Inventory]:setMetadata(source, slot, itemData.info)
+    elseif Inventory == 'origen_inventory' then
+        local itemData = exports[Inventory]:getItem(source, item, false, false)
+        if not next(itemData) then return end
+        itemData[1].metadata[metatype] = metavalue
+        exports[Inventory]:setMetadata(source, itemData[1].slot, itemData[1].metadata)
     else
         local itemData = exports[Inventory]:GetItemByName(source, item)
         if not itemData then return end
