@@ -7,6 +7,8 @@ return {
     anims = {
         mining = {
             label = 'Mining..',
+            description = 'Mining ores from the ground',
+            icon = 'fa-solid fa-hammer',
             position = 'bottom',
             useWhileDead = false,
             canCancel = true,
