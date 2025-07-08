@@ -1,27 +1,31 @@
 -- Initialize config(s)
-local shared = require 'config.shared'
-local client = require 'config.client'
-local icons  = require 'config.icons'
+local shared     = require 'config.shared'
+local client     = require 'config.client'
+local icons      = require 'config.icons'
 
 -- Initialize table to store ores
-local ores = {}
+local ores       = {}
+
+-- Initialize table to store mines
+local mines = {}
 
 -- Initialize variable to store inside mine state
-local inside = false
+local inside     = false
+local insideMine = nil
 
 -- Localize export
-local mining = exports.lation_mining
+local mining     = exports.lation_mining
 
 -- Mine an ore
 --- @param zoneId number
 --- @param oreId number
-local function mineOre(zoneId, oreId)
+local function mineOre(mineId, zoneId, oreId)
     if not zoneId or not oreId then return end
 
-    local zone = shared.mining.zones[zoneId]
+    local zone = shared.mining[mineId].zones[zoneId]
     if not zone then return end
 
-    local ore = ores[zoneId] and ores[zoneId][oreId]
+    local ore = ores[mineId][zoneId] and ores[mineId][zoneId][oreId]
     if not ore or not DoesEntityExist(ore.entity) then return end
 
     local level = mining:GetPlayerData('level')
@@ -51,7 +55,7 @@ local function mineOre(zoneId, oreId)
     end
 
     local hour = GetClockHours()
-    local hours = shared.mining.hours
+    local hours = shared.mining[mineId].hours
     if hour < hours.min or hour > hours.max then
         ShowNotification(locale('notify.nighttime'), 'error')
         return
@@ -64,18 +68,18 @@ local function mineOre(zoneId, oreId)
 
     if ProgressBar(anim) then
         DeleteEntity(ore.entity)
-        ores[zoneId][oreId] = { respawn = GetGameTimer() + zone.respawn }
-        TriggerServerEvent('lation_mining:minedore', zoneId, oreId)
+        ores[mineId][zoneId][oreId] = { respawn = GetGameTimer() + zone.respawn }
+        TriggerServerEvent('lation_mining:minedore', mineId, zoneId, oreId)
     end
 end
 
 -- Spawn an ore
 --- @param zoneId number
 --- @param oreId number
-local function spawnOre(zoneId, oreId)
-    if not zoneId or not oreId then return end
+local function spawnOre(mineId, zoneId, oreId)
+    if not mineId or not zoneId or not oreId then return end
 
-    local zone = shared.mining.zones[zoneId]
+    local zone = shared.mining[mineId].zones[zoneId]
     if not zone then return end
 
     local ore = zone.ores[oreId]
@@ -85,12 +89,14 @@ local function spawnOre(zoneId, oreId)
     local model = models[math.random(#models)]
     lib.requestModel(model)
     while not HasModelLoaded(model) do Wait(0) end
-    local entity = CreateObject(model, ore.x, ore.y, ore.z, false, false, false)
+    local groundFound, groundZ = GetGroundZFor_3dCoord(ore.x, ore.y, ore.z, false)
+    local oreZ = groundFound and groundZ or ore.z
+    local entity = CreateObject(model, ore.x, ore.y, oreZ, false, false, false)
     PlaceObjectOnGroundProperly(entity)
     FreezeEntityPosition(entity, true)
     AddTargetEntity(entity, {
         {
-            name = zoneId .. oreId,
+            name = mineId .. zoneId .. oreId,
             label = locale('target.mine-ore'),
             icon = icons.mine,
             iconColor = icons.mine_color,
@@ -99,40 +105,48 @@ local function spawnOre(zoneId, oreId)
                 return not IsPedInAnyVehicle(cache.ped, true)
             end,
             onSelect = function()
-                mineOre(zoneId, oreId)
+                mineOre(mineId, zoneId, oreId)
             end,
             action = function()
-                mineOre(zoneId, oreId)
+                mineOre(mineId, zoneId, oreId)
             end
         }
     })
 
-    ores[zoneId][oreId] = { entity = entity, respawn = nil }
+    ores[mineId][zoneId][oreId] = { entity = entity, respawn = nil }
 end
 
 -- Setup on mine enter
-local function enterMine()
+local function enterMine(mineId)
     inside = not inside
-    for zoneId, zone in pairs(shared.mining.zones) do
-        ores[zoneId] = ores[zoneId] or {}
+    insideMine = mineId
+    for zoneId, zone in pairs(shared.mining[mineId].zones) do
+        ores[mineId] = ores[mineId] or {}
+        ores[mineId][zoneId] = ores[mineId][zoneId] or {}
         for oreId, _ in pairs(zone.ores) do
-            spawnOre(zoneId, oreId)
+            spawnOre(mineId, zoneId, oreId)
         end
     end
 end
 
 -- Cleanup on mine exit
-local function exitMine()
+local function exitMine(mineId)
     inside = not inside
-    for zoneId, oreData in pairs(ores) do
-        for _, data in pairs(oreData) do
-            if data.entity and DoesEntityExist(data.entity) then
-                DeleteEntity(data.entity)
+    insideMine = nil
+    for id, data in pairs(ores) do
+        if id == mineId then
+            for zoneId, oreData in pairs(data) do
+                for _, data in pairs(oreData) do
+                    if data.entity and DoesEntityExist(data.entity) then
+                        DeleteEntity(data.entity)
+                    end
+                end
+                ores[mineId][zoneId] = nil
             end
+            ores[mineId] = nil
         end
-        ores[zoneId] = nil
     end
-    for _, data in pairs(shared.mining.zones) do
+    for _, data in pairs(shared.mining[mineId].zones) do
         for _, model in pairs(data.models) do
             SetModelAsNoLongerNeeded(model)
         end
@@ -142,11 +156,11 @@ end
 -- Ore respawn management thread
 CreateThread(function()
     while true do
-        if inside then
-            for zoneId, oreData in pairs(ores) do
+        if inside and insideMine then
+            for zoneId, oreData in pairs(ores[insideMine]) do
                 for oreId, data in pairs(oreData) do
                     if data.respawn and GetGameTimer() >= data.respawn then
-                        spawnOre(zoneId, oreId)
+                        spawnOre(insideMine, zoneId, oreId)
                     end
                 end
             end
@@ -159,25 +173,43 @@ end)
 
 -- Setup on player loaded
 AddEventHandler('lation_mining:onPlayerLoaded', function()
-    lib.zones.sphere({
-        coords = shared.mining.center,
-        radius = 400,
-        onEnter = enterMine,
-        onExit = exitMine,
-        debug = shared.setup.debug
-    })
+    for mineId, data in pairs(shared.mining) do
+        local zone = lib.zones.sphere({
+            coords = data.center,
+            radius = 400,
+            onEnter = function()
+                Wait(500)
+                enterMine(mineId)
+            end,
+            onExit = function()
+                Wait(500)
+                exitMine(mineId)
+            end,
+            debug = shared.setup.debug
+        })
+        mines[mineId] = zone
+    end
 end)
 
 -- Cleanup on resource stop
 --- @param resourceName string
 AddEventHandler('onResourceStop', function(resourceName)
     if GetCurrentResourceName() ~= resourceName then return end
-    for zoneId, oreData in pairs(ores) do
-        for _, data in pairs(oreData) do
-            if data.entity and DoesEntityExist(data.entity) then
-                DeleteEntity(data.entity)
+    for mineId, oresData in pairs(ores) do
+        for zoneId, oreData in pairs(oresData) do
+            for _, data in pairs(oreData) do
+                if data.entity and DoesEntityExist(data.entity) then
+                    DeleteEntity(data.entity)
+                end
             end
+            ores[mineId][zoneId] = nil
         end
-        ores[zoneId] = nil
+        ores[mineId] = nil
+    end
+    for mineId, zone in pairs(mines) do
+        if zone  then
+            zone:remove()
+        end
+        mines[mineId] = nil
     end
 end)

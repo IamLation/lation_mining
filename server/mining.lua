@@ -11,19 +11,20 @@ local ores = {}
 -- Ore has been mined
 --- @param zoneId number
 --- @param oreId number
-RegisterNetEvent('lation_mining:minedore', function(zoneId, oreId)
-    if not source or not zoneId or not oreId then return end
+RegisterNetEvent('lation_mining:minedore', function(mineId, zoneId, oreId)
+    if not source or not mineId or not zoneId or not oreId then return end
     local source = source
 
-    local zone = shared.mining.zones[zoneId]
+    local zone = shared.mining[mineId].zones[zoneId]
     if not zone then return end
 
     local ore = zone.ores[oreId]
     if not ore then return end
 
-    ores[zoneId] = ores[zoneId] or {}
-    ores[zoneId][oreId] = ores[zoneId][oreId] or {}
-    local status = ores[zoneId][oreId][source]
+    ores[mineId] = ores[mineId] or {}
+    ores[mineId][zoneId] = ores[mineId][zoneId] or {}
+    ores[mineId][zoneId][oreId] = ores[mineId][zoneId][oreId] or {}
+    local status = ores[mineId][zoneId][oreId][source]
     if status and status.time and status.time > os.time() then return end
 
     local coords = GetEntityCoords(GetPlayerPed(source))
@@ -70,7 +71,7 @@ RegisterNetEvent('lation_mining:minedore', function(zoneId, oreId)
     local addXP = math.random(zone.xp.min, zone.xp.max)
     mining:AddPlayerData(source, 'exp', addXP)
 
-    ores[zoneId][oreId][source] = { time = os.time() + math.floor(zone.respawn / 1000) }
+    ores[mineId][zoneId][oreId][source] = { time = os.time() + math.floor(zone.respawn / 1000) }
 
     if server.logs.events.mined then
         local rewards = ''
@@ -86,10 +87,12 @@ end)
 CreateThread(function()
     while true do
         if next(ores) then
-            for zoneId, zoneData in pairs(ores) do
-                for oreId, status in pairs(zoneData) do
-                    if status.time and status.time <= os.time() then
-                        ores[zoneId][oreId][source] = nil
+            for mineId, mineData in pairs(ores) do
+                for zoneId, zoneData in pairs(mineData) do
+                    for oreId, status in pairs(zoneData) do
+                        if status.time and status.time <= os.time() then
+                            ores[mineId][zoneId][oreId][source] = nil
+                        end
                     end
                 end
             end
